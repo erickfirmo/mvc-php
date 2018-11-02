@@ -2,13 +2,16 @@
 
 namespace App\Controllers;
 
+use Core\View;
+
 class Controller
 {
     public function view($view)
     {
         /* passar pra poo */
-
-        return '../views/'.$view.'.php';
+        return (new View())->getView($view);
     }
+
+
 
 }

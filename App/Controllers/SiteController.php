@@ -11,10 +11,14 @@ class SiteController extends Controller
         return $this->view('index');
     }
 
-
     public function contato()
     {
         return $this->view('contato');
+    }
+
+    public function home()
+    {
+        return $this->view('home');
     }
     
 }

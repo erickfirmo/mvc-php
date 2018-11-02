@@ -2,56 +2,69 @@
 
 namespace Core;
 
-use App\View;
+use Core\View;
 use App\Controllers\Controller;
 use App\Controllers\SiteController;
 
 class Router
 {
     public $routes = [];
+    public $root = '/';
 
-    public function getRoutes()
+    public function __construct()
     {
-        return $this->routes;
+        $this->setRoutes();
+
+        if($this->validate($_GET['url']) == 'index.php/;') {
+            $this->get();
+        } else {
+            $this->root();
+        }
     }
 
     public function setRoutes()
     {
         $this->routes = include_once '../routes/routes.php';
     }
-    
+
+    public function getRoot()
+    {
+        return $this->root;
+    }
+
+    public function getRoutes()
+    {
+        return $this->routes;
+    }
+
     public function get()
     {
-
-        $this->setRoutes();
 
         $get = str_replace(';', '', $_GET['url']);
         $get = str_replace('index.php/', '', $get);
 
-        if($get == '')
+        if($get == NULL)
         {
-
-            include '../views/index.php';
-
+            include_once (new View())->getView('index');
 
         } elseif(!array_key_exists($get, $this->getRoutes())) {
 
-            include '../views/errors/404.php';
-
+            include_once $this->getError();
         } else {
-
-            foreach($this->getRoutes() as $route => $action)
-            {
-                if('index.php/'.$route.';' == $_GET['url'])
-                {
-                    include $action;
-                    break;
-                }
-
-            }
-
+            include_once $this->getRoutes()[$get];
         }
 
+    }
+
+    public function validate($get)
+    {
+        return isset($get);
+    }
+
+
+    public function getError()
+    {
+        return (new View())->getView('errors/404');
     }
 
 }

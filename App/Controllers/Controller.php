@@ -6,7 +6,9 @@ class Controller
 {
     public function view($view)
     {
-        return header('location:'.$_SESSION['PHP_SELF'].$view.'.php');
+        /* passar pra poo */
+
+        return '../views/'.$view.'.php';
     }
 
 }

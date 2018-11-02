@@ -1,6 +1,13 @@
 {
     "require": {
-        "php": "^7.1.11",
-        "nikic/fast-route": "^1.3"
+        "php": "^7.1.11"
+        
+    },
+
+    "autoload": {
+        "psr-4": {
+             "Core\\": "Core/",
+             "App\\": "App/"
+        }
     }
 }

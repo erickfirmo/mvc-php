@@ -3,6 +3,7 @@
 namespace Core;
 
 use Core\View;
+use Core\Request;
 use App\Controllers\Controller;
 use App\Controllers\SiteController;
 
@@ -14,13 +15,41 @@ class Router
     public function __construct()
     {
         $this->setRoutes();
-
-        if($this->validate($_GET['url']) == 'index.php/;') {
-            $this->get();
-        } else {
-            $this->root();
-        }
+       
+        include $this->request();
+        
     }
+
+    public function request()
+    {
+
+        if($this->validate($this->getUrl()) && $this->getUrl() != $this->getRoot())
+        {
+            $response = (new Request())->getResponse($this->getUrl());
+            
+        } elseif($this->validate($this->getUrl()) && $this->getUrl() == $this->getRoot()) {
+            $response = (new Request())->getResponse('index');
+        }else {
+            $response = $this->getError('404');
+        }
+
+        /* resquest  */
+        return $response;
+    }
+    
+    public function validate($routeName)
+    {
+        return array_key_exists($routeName, $this->getRoutes());
+
+    }
+
+    
+
+    public function getUrl()
+    {
+        return $_SERVER['REQUEST_URI'];
+    }
+    
 
     public function setRoutes()
     {
@@ -37,34 +66,10 @@ class Router
         return $this->routes;
     }
 
-    public function get()
+    public function getError($error)
     {
-
-        $get = str_replace(';', '', $_GET['url']);
-        $get = str_replace('index.php/', '', $get);
-
-        if($get == NULL)
-        {
-            include_once (new View())->getView('index');
-
-        } elseif(!array_key_exists($get, $this->getRoutes())) {
-
-            include_once $this->getError();
-        } else {
-            include_once $this->getRoutes()[$get];
-        }
-
-    }
-
-    public function validate($get)
-    {
-        return isset($get);
-    }
-
-
-    public function getError()
-    {
-        return (new View())->getView('errors/404');
+        return (new View())->getView('errors/'.$error);
+        /*precisa vevificar se arquivo existe */
     }
 
 }

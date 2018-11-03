@@ -1,8 +1,19 @@
 <?php
 
+/* configurações de rotas */
 
 return array(
-    '/' => (new App\Controllers\HomeController())->home(),
-    'contato' => (new App\Controllers\SiteController())->index(),
-    'home' => (new App\Controllers\SiteController())->index(),
+    '/' => [
+        'action' => (new App\Controllers\SiteController())->index(),
+        'method' => 'GET'
+    ],
+    '/home' => [
+        'action' => (new App\Controllers\SiteController())->home(),
+        'method' => 'GET'
+    ],
+    '/contato' => [
+        'action' => (new App\Controllers\SiteController())->contato(),
+        'method' => 'GET'
+    ],
+    
 );

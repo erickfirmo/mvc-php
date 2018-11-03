@@ -20,5 +20,12 @@ class SiteController extends Controller
     {
         return $this->view('home');
     }
+
+    public function enviar()
+    {
+
+
+        return $this->view('home');
+    }
     
 }

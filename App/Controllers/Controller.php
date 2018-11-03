@@ -6,6 +6,13 @@ use Core\View;
 
 class Controller
 {
+
+
+    public function  __construct()
+    {
+
+    }
+
     public function view($view)
     {
         /* passar pra poo */
@@ -15,3 +22,6 @@ class Controller
 
 
 }
+
+
+/* methodos globais: view(), route() */

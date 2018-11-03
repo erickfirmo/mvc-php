@@ -23,7 +23,7 @@ class Request
                 return $this->view($route);
             } elseif($this->getMethod() == 'POST'){
 
-                return $this->;
+                
 
             }
 

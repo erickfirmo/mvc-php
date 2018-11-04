@@ -1,7 +1,7 @@
 
 <h1>Contato</h1>
 <br>
-<form method="POST" action="/contato">
+<form method="POST" action="/enviar">
 
     <label for="nome">Nome</label>
     <input type="text" name="nome" id="nome">
@@ -12,4 +12,7 @@
     <textarea name="mensagem" id="mensagem" cols="30" rows="10"></textarea>
 
 </form>
+
+
+<?php echo $_SESSION['teste']; ?>
 

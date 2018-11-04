@@ -7,33 +7,46 @@ use Core\View;
 
 class Request
 {
+    public $nome;
+
     public function __construct()
     {
+        if(isset($_SESSION['REQUEST_FORM']))
+        {
+            $this->nome = $_SESSION['REQUEST_FORM']['nome'];
+        }
+
+
+
+
+    }
+
+    public function get($url)
+    {
+        return $this->view($url);
+    }
+
+
+    public function post($routeName, $post, $routes)
+    {
+
+        $actions = explode('@', $routes[$routeName]['action']);
+        $controller = "App\Controllers\\".$actions[0];
+        $action = $actions[1];
+
+
+        return (new $controller())->$action();
+
         
     }
 
-    public function getResponse($route)
-    {
-
-        if($this->validate($route)){
-            
-
-            if($this->getMethod() == 'GET')
-            {
-                return $this->view($route);
-            } elseif($this->getMethod() == 'POST'){
-
-                
-
-            }
-
-
-
-
-        }
-    }
 
     public function view($route)
+    {
+        return (new Controller())->view($route);
+    }
+
+    public function action($route)
     {
         return (new Controller())->view($route);
     }
@@ -45,12 +58,8 @@ class Request
         }
     }
 
-    public function getMethod()
-    {
 
-        return $_SERVER['REQUEST_METHOD'];
-
-    }
+    
 
 
 

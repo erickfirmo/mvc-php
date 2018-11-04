@@ -1,3 +1,3 @@
 <?php
 
-echo 'Home';
+echo $_SESSION['teste'];

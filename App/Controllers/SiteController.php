@@ -24,8 +24,18 @@ class SiteController extends Controller
     public function enviar()
     {
 
+        //$_SESSION['teste'] = $_POST['nome'];
 
-        return $this->view('home');
+        header('location: http://mvc.loc/contato');
+		exit(); 
+    }
+
+    public function redirect($route)
+    {
+
+        
+        header('location: http://teste.loc/teste');
+		exit();
     }
     
 }

@@ -15,42 +15,71 @@ class Router
     public function __construct()
     {
         $this->setRoutes();
-       
-        include $this->request();
         
-    }
-
-    public function request()
-    {
-
-        if($this->validate($this->getUrl()) && $this->getUrl() != $this->getRoot())
+        if($this->getMethod() == 'GET')
         {
-            $response = (new Request())->getResponse($this->getUrl());
-            
-        } elseif($this->validate($this->getUrl()) && $this->getUrl() == $this->getRoot()) {
-            $response = (new Request())->getResponse('index');
-        }else {
-            $response = $this->getError('404');
+
+            include $this->getResponse();
+
+
+        } elseif($this->getMethod() == 'POST'){
+            $a = $this->getResponse();
+
         }
-
-        /* resquest  */
-        return $response;
     }
-    
-    public function validate($routeName)
+
+    public function getResponse()
     {
-        return array_key_exists($routeName, $this->getRoutes());
-
+        /* request  */
+        return $this->request($this->getUrl());
     }
 
-    
 
+    public function request($url)
+    {  
+        if(!$this->validate($url)) {
+
+            return $this->getError('404');
+
+        } elseif($this->validate($url) && $url == $this->getRoot()) {
+
+            return (new Request())->get('index');
+
+        } else {
+
+            if($this->getMethod() == 'GET')
+            {
+
+                return (new Request())->get($url);
+
+
+            } elseif($this->getMethod() == 'POST'){
+
+                return $action = (new Request())->post($url, $_POST, $this->getRoutes());
+
+
+            }
+
+        }
+    }
+
+    public function getMethod()
+    {
+        return $_SERVER['REQUEST_METHOD'];
+    }
+
+    public function validate($url)
+    {
+        ## return isset($url) && array_key_exists($url, $this->getRoutes()) ? true : false;
+        return true;
+    
+    }
+    
     public function getUrl()
     {
         return $_SERVER['REQUEST_URI'];
     }
     
-
     public function setRoutes()
     {
         $this->routes = include_once '../routes/routes.php';
@@ -69,7 +98,6 @@ class Router
     public function getError($error)
     {
         return (new View())->getView('errors/'.$error);
-        /*precisa vevificar se arquivo existe */
     }
 
 }

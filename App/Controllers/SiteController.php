@@ -8,23 +8,23 @@ class SiteController extends Controller
 {
     public function index()
     {
-        return $this->view('index');
+        return $this->view('/index');
     }
 
     public function contato()
     {
-        return $this->view('contato');
+        return $this->view('/contato');
     }
 
     public function home()
     {
-        return $this->view('home');
+        return $this->view('/home');
     }
 
     public function enviar()
     {
 
-        //$_SESSION['teste'] = $_POST['nome'];
+        $_SESSION['teste'] = $_POST['nome'];
 
         header('location: http://mvc.loc/contato');
 		exit(); 
@@ -34,7 +34,7 @@ class SiteController extends Controller
     {
 
         
-        header('location: http://teste.loc/teste');
+        header('location: http://mvc.loc/teste');
 		exit();
     }
     

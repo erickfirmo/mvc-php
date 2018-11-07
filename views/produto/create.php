@@ -4,18 +4,15 @@
 <form method="POST" action="/produto/store">
 
     <label for="produto">produto</label>
-    <input type="text" name="produto" id="produto">
+    <input type="text" name="nome" id="produto">
     
     <br>
 </form>
 
+<a href="http://mvc.loc/produto">index produto</a>
 
-<?php 
+<?php
 
-if(isset($_SESSION['produto']))
-{
-    echo $_SESSION['produto'];
-}
+echo $_SERVER['REQUEST_METHOD'];
 
-?>
 

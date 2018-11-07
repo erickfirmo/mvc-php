@@ -20,12 +20,14 @@ class ProdutoController extends Controller
 
     public function store()
     {
-        $this->redirect('/produto');
+        
+        $_SESSION['nome'] = $_POST['nome'];
+        
+        $this->redirect('/produto/');
     }
 
     public function show($id)
     {
-        echo $id;
         return $this->view('/produto/show');
     }
 
@@ -33,7 +35,6 @@ class ProdutoController extends Controller
 
     public function edit($id)
     {
-        echo $id;
         return $this->view('/produto/edit');
     }
 
@@ -47,6 +48,7 @@ class ProdutoController extends Controller
     
     public function redirect($route)
     {
+        $_SESSION['request@url'] = $route;
         return header('location: http://mvc.loc'.$route);
 		exit();
     }

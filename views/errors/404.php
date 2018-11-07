@@ -1,3 +1,14 @@
+<h1>NOT FOUND !</h1>
+
+<br>
+
+
 <?php
 
-echo '404 NOT FOUND';
+
+echo $_SESSION['teste'];
+
+
+
+
+

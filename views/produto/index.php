@@ -3,18 +3,21 @@
 <br>
 
 
+<a href="http://mvc.loc/produto/create">Create</a>
+
 <?php 
 
 
 
 
-if(isset($_SESSION['produto']))
+if(isset($_SESSION['nome']))
 {
-    echo $_SESSION['produto'];
+    echo $_SESSION['nome'];
 }
 
 
 
 
-?>
+
+echo $_SERVER['REQUEST_METHOD'];
 

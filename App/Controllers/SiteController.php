@@ -16,6 +16,11 @@ class SiteController extends Controller
         return $this->view('/contato');
     }
 
+    public function show()
+    {
+        return $this->view('/produto/show');
+    }
+
     public function home()
     {
         return $this->view('/home');

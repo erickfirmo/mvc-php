@@ -4,6 +4,8 @@ namespace Core;
 
 use Core\View;
 
+
+
 class Router
 {
     public $routes = [];
@@ -19,21 +21,94 @@ class Router
     {
         $this->setRoutes();
         $this->setUrl();
-        
         if($this->hasParameter())
         {
             $this->setParameter($this->getParameterIndex());
         }
-
-        $this->setName();
         
+        if(!isset($_SESSION['request@url']))
+        {
+            
+            $_SESSION['request@url'] = $_SERVER['REQUEST_URI'];
+            
+
+        } elseif($_SESSION['request@url'] == 'NULL') {
+            if($this->validate())
+            {
+                
+                $_SESSION['request@url'] = $_SERVER['REQUEST_URI'];
+             
+
+            } else {
+                $_SESSION['request@view'] = '404';
+            }
+
+        }
+        
+
+
+
         if($this->validate())
         {
             $this->setAction();
-            include $this->render($this->getAction());
+            
+            if(!isset($_SESSION['request@action']) && !isset($_SESSION['request@view']))
+            {
+                $_SESSION['request@action'] = true;
+                $_SESSION['request@view'] = false;
+            }
+
+            if($_SESSION['request@view'] && !$_SESSION['request@action'])
+            {
+                include $_SESSION['request@view'];
+
+
+
+                $_SESSION['request@view'] = false;
+                $_SESSION['request@action'] = true;
+
+            } elseif($_SESSION['request@action'] && !$_SESSION['request@view']) {
+                $this->render($this->getAction());
+
+            }
+
         } else {
-            include $this->getError('404');
+            include '../views/errors/404.php';
+
+
+            
         }
+
+    }
+
+
+
+    public function validate()
+    {
+
+        $name = $this->getName();
+
+
+        $routeName = str_replace($this->getParameter(),'$id', $name);
+
+        $_SESSION['request@route'] = $routeName;
+
+        $_SESSION['validate'] = array_key_exists($routeName, $this->getRoutes());
+        
+
+
+    
+
+        return array_key_exists($routeName.'/', $this->getRoutes()) || array_key_exists($routeName, $this->getRoutes()) ? true : false;
+         
+            
+        
+
+
+
+        //return true;
+
+       
     }
 
     public function setParameter($parameterIndex){
@@ -82,7 +157,7 @@ class Router
 
     public function getName()
     {
-        return $this->name;
+        return $_SERVER['REQUEST_URI'];
     }
 
     
@@ -134,18 +209,31 @@ class Router
     }
 
     public function setAction(){
-        $this->action = $this->getRoutes()[$this->getName()]['action'];
+        $name = str_replace($this->getParameter(), '$id', $this->getName());
+
+        $routeName = substr($name, -1) != '/' ? $name.'/' : $name;
+
+
+        $this->action = $this->getRoutes()[$routeName]['action'];
     }
 
-    public function setName()
+    /*public function setName()
     {
+
+        
+            $name = $_SERVER['REQUEST_URI'];
+        
+            
         if(!$this->hasParameter())
         {
-            $this->name = $_SERVER['REQUEST_URI'];
+            $this->name = $name;
+
+
+
         } else {
-            $this->name = str_replace($this->getParameter(), '$id', $_SERVER['REQUEST_URI']);
+            $this->name = $name;
         }
-    }
+    }*/
 
     public function setMethod()
     {
@@ -160,11 +248,7 @@ class Router
         return $_SERVER['REQUEST_METHOD'];
     }
 
-    public function validate()
-    {
-        return array_key_exists($this->getName(), $this->getRoutes()) ? true : false;
-       
-    }
+    
     
     public function getUrl()
     {

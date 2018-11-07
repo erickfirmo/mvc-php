@@ -14,6 +14,7 @@ class ProdutoController extends Controller
 
     public function create()
     {
+        echo 'opa';
         return $this->view('/produto/create');
     }
 

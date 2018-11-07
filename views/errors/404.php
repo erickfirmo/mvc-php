@@ -3,10 +3,6 @@
 <br>
 
 
-<?php
-
-
-echo $_SESSION['teste'];
 
 
 

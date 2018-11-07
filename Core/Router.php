@@ -25,8 +25,8 @@ class Router
         {
             $this->setParameter($this->getParameterIndex());
         }
-        
-        if(!isset($_SESSION['request@url']))
+        //
+        /*if(!isset($_SESSION['request@url']))
         {
             
             $_SESSION['request@url'] = $_SERVER['REQUEST_URI'];
@@ -43,7 +43,11 @@ class Router
                 $_SESSION['request@view'] = '404';
             }
 
-        }
+        }*/
+
+        
+
+        
         
 
 
@@ -51,26 +55,26 @@ class Router
         if($this->validate())
         {
             $this->setAction();
-            
-            if(!isset($_SESSION['request@action']) && !isset($_SESSION['request@view']))
+            //
+            /*if(!isset($_SESSION['request@action']) && !isset($_SESSION['request@view']))
             {
                 $_SESSION['request@action'] = true;
                 $_SESSION['request@view'] = false;
             }
 
             if($_SESSION['request@view'] && !$_SESSION['request@action'])
-            {
-                include $_SESSION['request@view'];
+            {*/
+                $this->render($this->getAction());
 
 
 
-                $_SESSION['request@view'] = false;
+            /*    $_SESSION['request@view'] = false;
                 $_SESSION['request@action'] = true;
 
             } elseif($_SESSION['request@action'] && !$_SESSION['request@view']) {
                 $this->render($this->getAction());
 
-            }
+            }*/
 
         } else {
             include '../views/errors/404.php';
@@ -155,6 +159,8 @@ class Router
     }
 
 
+    
+
     public function getName()
     {
         return $_SERVER['REQUEST_URI'];
@@ -185,12 +191,10 @@ class Router
                     $a = 'destroy';
                 } 
 
-                
                 return (new $c())->$a($this->getParameter());
 
             } elseif(!is_numeric($this->getUrlParam(0)) && $this->getName() != '/') {
 
-                
                 return (new $c())->$a();
 
             } elseif($this->getName() == '/') {
@@ -200,8 +204,14 @@ class Router
             }
 
             return (new $c())->$a();
-        
     }
+
+
+
+
+
+
+
 
     public function getAction()
     {

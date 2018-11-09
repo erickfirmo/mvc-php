@@ -1,3 +1,4 @@
+<?php if(!defined('LAYOUT')) return 'site'; ?>
 
 
 <h1>Edit Produto</h1>
@@ -15,8 +16,6 @@
 </form>
 
 <a href="http://mvc.loc/produto">index produto</a>
-<?php
 
-echo $produto;
 
 

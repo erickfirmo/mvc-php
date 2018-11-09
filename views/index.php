@@ -1,9 +1,5 @@
+<?php if(!defined('LAYOUT')) return 'app'; ?>
 
-<?php
-
-echo 'HEADER';
-
-?>
 
 
 

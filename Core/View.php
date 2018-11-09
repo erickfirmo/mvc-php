@@ -10,10 +10,14 @@ class View
         if($values != NULL)
             foreach($values as $responseName => $responseValue)
                 $$responseName = $responseValue;
-                
-        include '../views'.$view.'.php';
-    }
+        
+        $layout = include '../views'.$view.'.php';
 
-    
+        define('CONTENT', $view);
+
+        define('LAYOUT', $layout);
+
+        include '../views/layouts/'.$layout.'.php';
+    }
 
 }

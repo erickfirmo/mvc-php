@@ -22,12 +22,31 @@ class Router
         $this->setRoutes();
         $this->setUrl();
 
-        if($this->hasParameter())
+        if($this->hasParameter()){
             $this->setParameter($this->getParameterIndex());
+
+        }
+
+
+        
         
         if($this->validate())
         {   $this->setAction();
+
+
+            if($this->requestMethod() == 'GET' && (($this->getUrl()[0] == 'update' || $this->getUrl()[0] == 'destroy') || $this->getUrl()[0] == 'store')) {
+            
+                include '../views/errors/404.php';
+    
+            } else {
+                
             $resquest = $this->render($this->getAction());
+            }
+        
+
+
+
+
         }else{
             include '../views/errors/404.php';
         }
@@ -138,10 +157,10 @@ class Router
         return $this->namespace;
     }
 
-    /*protected function requestMethod()
+    protected function requestMethod()
     {
         return $_SERVER['REQUEST_METHOD'];
-    }*/
+    }
 
     protected function getUrlParam($i)
     {

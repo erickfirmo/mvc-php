@@ -21,20 +21,31 @@ class Controller
     public function redirect($route)
     {
         $url = explode('/', $route);
+        
 
         switch ($url[2]) {
 
             case 'edit':
+            
+                if(defined('PARAMETER'))
+                {
 
-                header('location:http://mvc.loc/produto/'.constant('PARAMETER').'/edit');
-                exit();
+                    header('location:http://mvc.loc/'.$url[1].'/'.constant('PARAMETER').'/edit');
+                    exit();
+                } else {
+                    
+                    header('location:http://mvc.loc/');
+                    exit();
+                }
+
+
 
                 break;
 
             case 'show':
 
 
-                header('location:http://mvc.loc/produto/'.constant('PARAMETER'));
+                header('location:http://mvc.loc/'.$url[1].'/'.constant('PARAMETER'));
                 exit();
 
                 break;

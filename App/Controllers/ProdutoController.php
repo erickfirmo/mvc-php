@@ -38,9 +38,10 @@ class ProdutoController extends Controller
 
     public function show($id)
     {
-        define('PARAMETER', $id);
+        
+        $produto = 'FIND OR FAIL';
 
-        $produto = (new Produto())->find($id);
+        //retorna view erro se não achar registro pelo $id
 
 
         return $this->view('/produto/show', [
@@ -54,8 +55,9 @@ class ProdutoController extends Controller
 
     public function edit($id)
     {
-        
-        $produto = 'nome';
+        $produto = 'FIND OR FAIL';
+
+        //retorna view erro se não achar registro pelo $id
 
         return $this->view('/produto/edit', [
             'produto' => $produto
@@ -68,14 +70,11 @@ class ProdutoController extends Controller
 
     public function update($id)
     {
-        /*atualiza @id na model
-        $produto = (new Produto())->find($id);
         
+        $produto = new Produto();
         $produto->nome = $_POST['nome'];
-
         $produto->descricao = $_POST['descricao'];
-
-        $produto->update();*/
+        $produto->update();
 
         
         return $this->redirect('/produto/edit');

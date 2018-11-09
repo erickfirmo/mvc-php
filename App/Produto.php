@@ -19,6 +19,8 @@ class Produto
     public function update()
     {
         //UPDATE registro
+        
+        define('PARAMETER', 2);
 
         //retorna objeto atualizado
 

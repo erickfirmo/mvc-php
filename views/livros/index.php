@@ -3,12 +3,9 @@
 
 
 
-
-
-
-
-<h1>Index Produto</h1>
+<h1>Livros</h1>
 <br>
+
 <a href="http://mvc.loc/produto/create">Create</a>
 
 

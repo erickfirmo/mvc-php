@@ -4,54 +4,25 @@
 
 
 return [
-    '/' => [
-        'action' => 'SiteController@index',
-        'method' => 'GET'
-    ],
+    '/' => 'SiteController@index',
     
-    '/contato/' => [
-        'action' => 'SiteController@contato',
-        'method' => 'GET'
-    ],
+    '/contato/' => 'SiteController@contato',
 
-    '/produto/create/' => [
-        'action' => 'ProdutoController@create',
-        'method' => 'GET'
-    ],
+    '/produto/create/' => 'ProdutoController@create',
 
-    '/produto/store/' => [
-        'action' => 'ProdutoController@store',
-        'method' => 'POST'
-    ],
+    '/produto/store/' => 'ProdutoController@store',
+    
+    '/produto/$id/edit/' => 'ProdutoController@edit',
+        
+    '/produto/$id/edit' => 'ProdutoController@edit',
 
-    '/produto/$id/edit/' => [
-        'action' => 'ProdutoController@edit',
-        'method' => 'GET'
-    ],
-    '/produto/$id/edit' => [
-        'action' => 'ProdutoController@edit',
-        'method' => 'GET'
-    ],
+    '/produto/$id/update/' => 'ProdutoController@update',
 
-    '/produto/$id/update/' => [
-        'action' => 'ProdutoController@update',
-        'method' => 'POST'
-    ],
+    '/produto/$id/destroy/' => 'ProdutoController@destroy',
 
-    '/produto/$id/destroy/' => [
-        'action' => 'ProdutoController@destroy',
-        'method' => 'POST'
-    ],
+    '/produto/$id/' => 'ProdutoController@show',
 
-    '/produto/$id/' => [
-        'action' => 'ProdutoController@show',
-        'method' => 'GET'
-    ],
-
-    '/produto/' => [
-        'action' => 'ProdutoController@index',
-        'method' => 'GET'
-    ],
+    '/produtos/' => 'ProdutoController@index',
 
 ];
 

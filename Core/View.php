@@ -2,7 +2,6 @@
 
 namespace Core;
 
-
 class View
 {
     public function getViewResponse($view, $values=0)
@@ -10,14 +9,28 @@ class View
         if($values != NULL)
             foreach($values as $responseName => $responseValue)
                 $$responseName = $responseValue;
+
+                
+        $this->setView($view);
         
-        $layout = include '../views'.$view.'.php';
+        $this->setLayout(include '../views'.$view.'.php');
 
-        define('CONTENT', $view);
+        include '../views/layouts/'.$this->getLayout().'.php';
+    }
 
+    protected function setLayout($layout)
+    {
         define('LAYOUT', $layout);
+    }
 
-        include '../views/layouts/'.$layout.'.php';
+    protected function getLayout()
+    {
+        return constant('LAYOUT');
+    }
+
+    protected function setView($view)
+    {
+        define('CONTENT', $view);
     }
 
 }

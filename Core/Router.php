@@ -8,92 +8,78 @@ use Core\View;
 
 class Router
 {
-    public $routes = [];
-    public $root = '/';
-    public $name;
-    public $url;
-    public $action;
-    public $namespace = 'App\Controllers\\';
-    public $parameter;
-    public $parameterIndex;
+    protected $routes = [];
+    protected $root = '/';
+    protected $name;
+    protected $url;
+    protected $action;
+    protected $namespace = 'App\Controllers\\';
+    protected $parameter;
+    protected $parameterIndex;
 
     public function __construct()
     {
-
         $this->setRoutes();
-
         $this->setUrl();
-        //r
+
         if($this->hasParameter())
-        {
             $this->setParameter($this->getParameterIndex());
-        }
         
-
         if($this->validate())
-        {
-    
-            //executa método do controller e dá include na view      
-            $this->setAction();
-
+        {   $this->setAction();
             $resquest = $this->render($this->getAction());
-
-
-        } else {
-            
+        }else{
             include '../views/errors/404.php';
-
         }
-
-
-
-
     }
 
-
-    public function render($action)
+    protected function render($action)
     {
         $actions = explode('@', $action);
-        $controller = "App\Controllers\\".$actions[0];
+        $controller = $this->getNamespace().$actions[0];
         $method = $actions[1];
         
         if($this->hasParameter())
-        {
-            
-            
             (new $controller())->$method($this->getParameter());
-        } elseif(!is_numeric($this->getUrlParam(0))) {
+        elseif(!is_numeric($this->getUrlParam(0)))
+            (new $controller())->$method();
+    }
 
-                
+    protected function setRoutes()
+    {
+        $this->routes = include_once '../routes/routes.php';
+    }
 
-                (new $controller())->$method();
-    
-            
+    protected function getRoutes()
+    {
+        return $this->routes;
+    }
 
-        } 
+    protected function setUrl()
+    {
+        $url = $_SERVER['REQUEST_URI'];
+        if(substr($url,-1) == '/')
+        {
+            $url = substr_replace($url,"",-1);
+        };
+        $this->url = array_reverse(explode('/', ($url)));
+    }
 
-
-       
+    protected function getUrl()
+    {
+        return $this->url;
     }
 
 
-    public function validate()
+    protected function validate()
     {
         $name = $this->getName();
         $routeName = str_replace($this->getParameter(),'$id', $name);
-        return (array_key_exists($routeName.'/', $this->getRoutes()) || array_key_exists($routeName, $this->getRoutes())) || $routeName == '/request' ? true : false;
+        return (array_key_exists($routeName.'/', $this->getRoutes()) || array_key_exists($routeName, $this->getRoutes())) ? true : false;
     }
 
-    public function setParameter($parameterIndex){
-        $this->parameter = $this->getUrlParam($parameterIndex);
-    }
-
-    public function getParameter()
-    {
-        return $this->parameter;
-    }
-
-    public function hasParameter()
+    
+    protected function hasParameter()
     {
         if(is_numeric($this->getUrlParam(0))) {
             $this->setParameterIndex(0);
@@ -112,92 +98,72 @@ class Router
         }
     }
 
-    public function setParameterIndex($parameterIndex)
+    protected function setParameter($parameterIndex){
+        $this->parameter = $this->getUrlParam($parameterIndex);
+    }
+
+    protected function getParameter()
+    {
+        return $this->parameter;
+    }
+
+    protected function setParameterIndex($parameterIndex)
     {
         $this->parameterIndex = $parameterIndex;
     }
 
-    public function getParameterIndex()
+    protected function getParameterIndex()
     {
         return $this->parameterIndex;
     }
 
-    public function getName()
-    {
-        return $_SERVER['REQUEST_URI'];
+    protected function setAction(){
+        $name = str_replace($this->getParameter(), '$id', $this->getName());
+        $routeName = substr($name, -1) != '/' ? $name.'/' : $name;
+        $this->action = $this->getRoutes()[$routeName];
     }
 
-    public function getAction()
+    protected function getAction()
     {
         return $this->action;
     }
 
-    public function setAction(){
-        $name = str_replace($this->getParameter(), '$id', $this->getName());
-        $routeName = substr($name, -1) != '/' ? $name.'/' : $name;
-        $this->action = $this->getRoutes()[$routeName]['action'];
-    }
-
-    public function setMethod()
+    protected function getName()
     {
-        if($this->getRoutes()[$this->getName()]['method'] == $this->requestMethod())
-        {
-            $this->method = $this->requestMethod();
-        }
+        return $_SERVER['REQUEST_URI'];
     }
 
-    public function requestMethod()
+    protected function getNamespace()
+    {
+        return $this->namespace;
+    }
+
+    /*protected function requestMethod()
     {
         return $_SERVER['REQUEST_METHOD'];
-    }
+    }*/
 
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    public function getUrlParam($i)
+    protected function getUrlParam($i)
     {
         if(isset($this->url[$i]))
-        {
             return $this->url[$i];
-        } elseif(isset($this->url[--$i]) && count($this->url) >= $i) {
+
+        elseif(isset($this->url[--$i]) && count($this->url) >= $i)
             return $this->url[$i];
-        } elseif(isset($this->url[--$i]) && count($this->url) >= $i) {
+
+        elseif(isset($this->url[--$i]) && count($this->url) >= $i)
             return $this->url[$i];
-        } else {
+
+        else
             return false;
-        }
+        
     }
 
-    public function setUrl()
-    {
-        $url = $_SERVER['REQUEST_URI'];
-        if(substr($url,-1) == '/')
-        {
-            $url = substr_replace($url,"",-1);
-        };
-        $this->url = array_reverse(explode('/', ($url)));
-    }
-    
-    public function setRoutes()
-    {
-        $this->routes = include_once '../routes/routes.php';
-    }
-
-    public function getRoot()
+    protected function getRoot()
     {
         return $this->root;
     }
 
-    public function getRoutes()
-    {
-        return $this->routes;
-    }
-
-    public function getError($error)
-    {
-        return (new View())->getView('/errors/'.$error);
-    }
+    
 
 }

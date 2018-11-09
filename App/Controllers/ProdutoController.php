@@ -9,65 +9,96 @@ class ProdutoController extends Controller
 {
     public function index()
     {
-        return $this->view('/produto/index');
+        $produtos = (new Produto())->all();
+        
+        return $this->view('/produto/index',[
+            'produtos' => $produtos
+        ]);
     }
 
+    
+
+   
+    //OK
     public function create()
     {
-        echo 'opa';
         return $this->view('/produto/create');
     }
 
 
     public function store()
     {
+
+        /*$produto = new Produto();
+
+        $produto->nome = $_POST['nome'];
+
+        $produto->descricao = $_POST['descricao'];
+
+        $produto->save();
+
+        $_SESSION['@id'] = $produto->id;*/
+
+    
+        return $this->redirect('/produto/edit');
+
+
         
-        $_SESSION['nome'] = $_POST['nome'];
-        
-        $this->redirect('/produto/');
+
     }
+
 
     public function show($id)
     {
-        return $this->view('/produto/show');
+        
+        $produto = (new Produto())->find($id);
+
+
+        return $this->view('/produto/show', [
+            'produto' => $produto
+        ]);
     }
+
+
+    /*public function teste()
+    {
+        return $this->view('/teste/home');
+    }*/
 
 
 
     public function edit($id)
     {
-        return $this->view('/produto/edit');
+        
+        $produto = (new Produto())->find($id);
+
+        
+        //retorna include da view
+        return $this->view('/produto/edit', [
+            'produto' => $produto
+        ]);
     }
+
+
+
+
 
     public function update($id)
     {
-        $_SESSION['produto'] = $_POST['produto'];
+        /*atualiza @id na model
+        $produto = (new Produto())->find($id);
+        
+        $produto->nome = $_POST['nome'];
 
-        $this->redirect('/produto');
+        $produto->descricao = $_POST['descricao'];
+
+        $produto->update();*/
+
+        
+        return $this->redirect('/produto/edit');
+
+
     }
-
-    
-    public function redirect($route)
-    {
-        $_SESSION['request@url'] = $route;
-        return header('location: http://mvc.loc'.$route);
-		exit();
-    }
-
-    /* public function home()
-    {
-        return $this->view('home');
-    }
-
-    public function show()
-    {
-        $_SESSION['nome'] = 'desafio';
-
-        header('location: http://mvc.loc/contato');
-		exit(); 
-    }*/
-
-
 
     
 }

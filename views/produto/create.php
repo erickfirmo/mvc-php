@@ -1,10 +1,14 @@
 
 <h1>Create Produto</h1>
 <br>
-<form method="POST" action="/produto/store">
+<form method="POST" action="/produto/store/">
 
     <label for="produto">produto</label>
-    <input type="text" name="nome" id="produto">
+    <input type="text" name="nome" id="nome">
+    <input type="text" name="descricao" id="descricao">
+
+    <input type="submit" value="Cadastrar">
+
     
     <br>
 </form>
@@ -13,6 +17,6 @@
 
 <?php
 
-echo $_SERVER['REQUEST_METHOD'];
+echo $_SESSION['nome'];
 
 

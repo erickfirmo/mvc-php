@@ -5,37 +5,17 @@ namespace Core;
 
 class View
 {
-
-
-   
-    
-    public function getView($view)
+    public function getView($view, $values=0)
     {
-        /*$_SESSION['request@view'] = '../views'.$view.'.php';
-        $_SESSION['request@action'] = false;
+        
+        $_SESSION['content@response'] = $values;
 
-        $a = $_SESSION['request@url'];
-        $_SESSION['request@url'] = 'NULL';*/
-
-        //return $this->redirect($a);
-
-        include '../views/layouts/layout.php';
         include '../views'.$view.'.php';
-
-
-
-        
-        
     }
 
-    public function redirect($route)
+    /*public function response()
     {
-        
-        return header('location: http://mvc.loc'.$route);
-		exit();
-    }
-
-
-    
+        return '../views/responder/index.php';
+    }*/
 
 }

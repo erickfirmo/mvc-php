@@ -1,23 +1,27 @@
 
+<?php
+
+require_once responder();
+
+
+?>
+
+
+
+
+
+
 <h1>Index Produto</h1>
 <br>
-
-
 <a href="http://mvc.loc/produto/create">Create</a>
 
-<?php 
 
-
-
-
-if(isset($_SESSION['nome']))
-{
-    echo $_SESSION['nome'];
-}
+<a href="http://mvc.loc/produto/1/edit">Edit</a>
 
 
 
 
 
-echo $_SERVER['REQUEST_METHOD'];
+
+
 

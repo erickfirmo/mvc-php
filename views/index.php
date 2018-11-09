@@ -1,3 +1,11 @@
+
 <?php
 
-echo 'ERICK PHP MVC';
+echo 'HEADER';
+
+?>
+
+
+
+<h1>ERICK PHP MVC</h1>
+

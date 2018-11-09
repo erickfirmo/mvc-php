@@ -2,38 +2,6 @@
 
 /* configurações de rotas */
 
-/*function route($name, $action ,$method)
-{
-        return $name => [
-            'action' => $action,
-            'method' => $method,
-        ],
-
-
-}*/
-
-
-/*return array(
-    route('/', 'SiteController@index', 'GET'),
-    route('/contato', 'SiteController@contato', 'GET'),
-    route('/produto/create', 'ProdutoController@create', 'GET'),
-    route('/produto/store', 'ProdutoController@store', 'POST'),
-    route('/produto/$id/edit', 'ProdutoController@index', 'GET'),
-    route('/produto/$id/update', 'ProdutoController@update', 'POST'),
-    route('/produto/$id/destroy', 'ProdutoController@destroy', 'POST'),
-    route('/produto/$id', 'ProdutoController@show', 'GET'),
-    route('/produto', 'ProdutoController@index', 'GET'),
-
-
-
-
-
-    
-
-);*/
-
-
-
 
 return array(
     '/' => [
@@ -50,6 +18,11 @@ return array(
         'action' => 'ProdutoController@create',
         'method' => 'GET'
     ],
+
+    /*'/teste/home/' => [
+        'action' => 'ProdutoController@teste',
+        'method' => 'GET'
+    ],*/
 
     '/produto/store/' => [
         'action' => 'ProdutoController@store',

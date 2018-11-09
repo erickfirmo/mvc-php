@@ -34,7 +34,17 @@ class Router
         {   $this->setAction();
 
 
-            if($this->requestMethod() == 'GET' && (($this->getUrl()[0] == 'update' || $this->getUrl()[0] == 'destroy') || $this->getUrl()[0] == 'store')) {
+            /*if($this->requestMethod() == 'GET' && (($this->getUrl()[0] == 'update' || $this->getUrl()[0] == 'destroy') || $this->getUrl()[0] == 'store')) {
+            
+                include '../views/errors/404.php';
+    
+            } else {
+                
+            $resquest = $this->render($this->getAction());
+            }*/
+
+
+            if($this->requestMethod() != $this->getMethod()) {
             
                 include '../views/errors/404.php';
     
@@ -139,7 +149,7 @@ class Router
     protected function setAction(){
         $name = str_replace($this->getParameter(), '$id', $this->getName());
         $routeName = substr($name, -1) != '/' ? $name.'/' : $name;
-        $this->action = $this->getRoutes()[$routeName];
+        $this->action = $this->getRoutes()[$routeName]['action'];
     }
 
     protected function getAction()
@@ -160,6 +170,15 @@ class Router
     protected function requestMethod()
     {
         return $_SERVER['REQUEST_METHOD'];
+    }
+
+
+    protected function getMethod()
+    {
+        
+        $name = str_replace($this->getParameter(), '$id', $this->getName());
+        $routeName = substr($name, -1) != '/' ? $name.'/' : $name;
+        return $this->getRoutes()[$routeName]['method'];
     }
 
     protected function getUrlParam($i)

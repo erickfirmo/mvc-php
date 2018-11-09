@@ -45,10 +45,16 @@ class Controller
             case 'show':
 
 
-                header('location:http://mvc.loc/'.$url[1].'/'.constant('PARAMETER'));
-                exit();
+            if(defined('PARAMETER'))
+            {
 
-                break;
+                header('location:http://mvc.loc/'.$url[1].'/'.constant('PARAMETER').'/edit');
+                exit();
+            } else {
+                
+                header('location:http://mvc.loc/');
+                exit();
+            }
 
         }
         

@@ -20,7 +20,7 @@ class Produto
     {
         //UPDATE registro
         
-        define('PARAMETER', 2);
+        define('PARAMETER', 3);
 
         //retorna objeto atualizado
 

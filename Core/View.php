@@ -5,17 +5,15 @@ namespace Core;
 
 class View
 {
-    public function getView($view, $values=0)
+    public function getViewResponse($view, $values=0)
     {
-        
-        $_SESSION['content@response'] = $values;
-
+        if($values != NULL)
+            foreach($values as $responseName => $responseValue)
+                $$responseName = $responseValue;
+                
         include '../views'.$view.'.php';
     }
 
-    /*public function response()
-    {
-        return '../views/responder/index.php';
-    }*/
+    
 
 }

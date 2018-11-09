@@ -1,9 +1,4 @@
-<?php
 
-require_once responder();
-
-
-?>
 
 <h1>Edit Produto</h1>
 <br>
@@ -22,6 +17,6 @@ require_once responder();
 <a href="http://mvc.loc/produto">index produto</a>
 <?php
 
-var_dump($produto);
+echo $produto;
 
 

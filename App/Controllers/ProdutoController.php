@@ -70,7 +70,7 @@ class ProdutoController extends Controller
     public function edit($id)
     {
         
-        $produto = (new Produto())->find($id);
+        $produto = 'nome';
 
         
         //retorna include da view

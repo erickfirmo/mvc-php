@@ -35,6 +35,7 @@ class Router
     
             //executa método do controller e dá include na view      
             $this->setAction();
+
             $resquest = $this->render($this->getAction());
 
 

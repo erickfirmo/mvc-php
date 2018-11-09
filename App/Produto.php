@@ -39,6 +39,11 @@ class Produto
 
     }
 
+    public function teste()
+    {
+       include '../views/engines/responder.php';
+    }
+
     public function all()
     {
        

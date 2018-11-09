@@ -14,7 +14,7 @@ class Controller
 
     public function view($view, $values=0)
     {
-            return (new View())->getView($view, $values);
+            return (new View())->getViewResponse($view, $values);
         
     }
 

@@ -8,50 +8,43 @@ class Produto
     public $descricao;
     public function save()
     {
-        //auto increment
-        //$this->id = $_SESSION['@id']+1;
-        //$_SESSION['@id'] = $this->id;
 
-        //$this->id = $_SESSION['@id'];
+        // INSERT values($this->nome, $this->descricao)
 
-        //$_SESSION['@database'] = $this;
 
-        //return $this->nome;
+
+        define('PARAMETER', 1);
     }
 
     public function update()
     {
-        //$_SESSION['@id'] = $_SESSION['@id'];
+        //UPDATE registro
 
-        //$_SESSION['@database'] = $this;
-
-
+        //retorna objeto atualizado
 
     }
-
-
-    
-
 
     public function find($id)
     {
-     //return $this;
+        /*SELECT * FROM produtos
+        WHERE id=$id; */
 
-    }
+        //retorna objeto pelo id
 
-    public function teste()
-    {
-       include '../views/engines/responder.php';
     }
 
     public function all()
     {
-       
+        //SELECT * FROM produtos;
+
+        //retorna objetos
+
     }
 
     public function destroy($id)
     {
-       
+       /*DROP * FROM produtos
+       WHERE id=$id*/
 
     }
 

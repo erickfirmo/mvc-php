@@ -59,17 +59,7 @@ class Router
         
         if($this->hasParameter())
         {
-            /*if(is_numeric($this->getUrlParam(0)))
-            {
-                $a = 'show';
-            } elseif($this->getUrlParam(0) == 'edit') {
-                $a = 'edit';
-            } elseif($this->getUrlParam(0) == 'update') {
-                $a = 'update';
-            } elseif($this->getUrlParam(0) == 'destroy') {
-                $a = 'destroy';
-            } */
-
+            
             
             (new $controller())->$method($this->getParameter());
         } elseif(!is_numeric($this->getUrlParam(0))) {

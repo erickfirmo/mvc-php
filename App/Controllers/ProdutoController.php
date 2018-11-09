@@ -16,10 +16,9 @@ class ProdutoController extends Controller
         ]);
     }
 
+
     
 
-   
-    //OK
     public function create()
     {
         return $this->view('/produto/create');
@@ -28,29 +27,19 @@ class ProdutoController extends Controller
 
     public function store()
     {
-
-        /*$produto = new Produto();
-
+        $produto = new Produto();
         $produto->nome = $_POST['nome'];
-
         $produto->descricao = $_POST['descricao'];
-
         $produto->save();
 
-        $_SESSION['@id'] = $produto->id;*/
-
-    
         return $this->redirect('/produto/edit');
-
-
-        
-
     }
 
 
     public function show($id)
     {
-        
+        define('PARAMETER', $id);
+
         $produto = (new Produto())->find($id);
 
 
@@ -60,10 +49,6 @@ class ProdutoController extends Controller
     }
 
 
-    /*public function teste()
-    {
-        return $this->view('/teste/home');
-    }*/
 
 
 
@@ -72,8 +57,6 @@ class ProdutoController extends Controller
         
         $produto = 'nome';
 
-        
-        //retorna include da view
         return $this->view('/produto/edit', [
             'produto' => $produto
         ]);

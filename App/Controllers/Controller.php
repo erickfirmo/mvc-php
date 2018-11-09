@@ -26,7 +26,7 @@ class Controller
 
             case 'edit':
 
-                header('location:http://mvc.loc/produto/'.$_SESSION['@id'].'/edit');
+                header('location:http://mvc.loc/produto/'.constant('PARAMETER').'/edit');
                 exit();
 
                 break;
@@ -34,20 +34,9 @@ class Controller
             case 'show':
 
 
-                header('location:http://mvc.loc/produto/'.$_SESSION['@id']);
+                header('location:http://mvc.loc/produto/'.constant('PARAMETER'));
                 exit();
 
-                break;
-            case 'edit':
-
-                header('location:http://mvc.loc/produto/'.$_SESSION['@id'].'/edit');
-                exit();
-
-                break;
-            
-            default:
-            
-                # code...
                 break;
 
         }

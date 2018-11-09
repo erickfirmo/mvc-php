@@ -15,8 +15,7 @@
 
 <a href="http://mvc.loc/produto">index produto</a>
 
-<?php
 
-echo $_SESSION['nome'];
+
 
 

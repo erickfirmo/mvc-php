@@ -3,7 +3,7 @@
 /* configurações de rotas */
 
 
-return array(
+return [
     '/' => [
         'action' => 'SiteController@index',
         'method' => 'GET'
@@ -18,11 +18,6 @@ return array(
         'action' => 'ProdutoController@create',
         'method' => 'GET'
     ],
-
-    /*'/teste/home/' => [
-        'action' => 'ProdutoController@teste',
-        'method' => 'GET'
-    ],*/
 
     '/produto/store/' => [
         'action' => 'ProdutoController@store',
@@ -58,8 +53,5 @@ return array(
         'method' => 'GET'
     ],
 
-
-    
-    
-);
+];
 

@@ -2,19 +2,17 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
+new DBConnection();
+
 function responder()
 {
-    return '../views/responder/index.php';
+    return '../views/engines/responder.php';
 }
 
 session_start();
 
 
 $route = (new Core\Router());
-
-
-
-
 
 
 

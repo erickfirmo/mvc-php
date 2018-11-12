@@ -6,7 +6,6 @@ use Core\View;
 
 class Controller
 {
-
     public function  __construct()
     {
 
@@ -14,50 +13,25 @@ class Controller
 
     public function view($view, $values=0)
     {
-            return (new View())->getViewResponse($view, $values);
-        
+        return (new View())->getViewResponse($view, $values);
     }
 
     public function redirect($route)
     {
-        $url = explode('/', $route);
-        
-
-        switch ($url[2]) {
-
-            case 'edit':
-            
-                if(defined('PARAMETER'))
-                {
-
-                    header('location:http://mvc.loc/'.$url[1].'/'.constant('PARAMETER').'/edit');
-                    exit();
-                } else {
-                    
-                    header('location:http://mvc.loc/');
-                    exit();
-                }
-
-
-
-                break;
-
-            case 'show':
-
-
-            if(defined('PARAMETER'))
+        $url = array_reverse(explode('/', $route));
+        if(defined('PARAMETER'))
+        {
+            if($url[0] == 'edit')
             {
-
-                header('location:http://mvc.loc/'.$url[1].'/'.constant('PARAMETER').'/edit');
-                exit();
-            } else {
-                
-                header('location:http://mvc.loc/');
-                exit();
+                $redirect = '/'.$url[1].'/'.constant('PARAMETER').'/edit';
+            } elseif($url[0] == 'show') {
+                $redirect = '/'.$url[1].'/'.constant('PARAMETER');
             }
-
+        }else{
+            $redirect = $route;
         }
-        
-    }
 
+        header('location:http://mvc.loc'.$redirect);
+            exit();
+    }
 }

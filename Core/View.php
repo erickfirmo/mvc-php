@@ -10,11 +10,8 @@ class View
             foreach($values as $responseName => $responseValue)
                 $$responseName = $responseValue;
 
-                
         $this->setView($view);
-        
         $this->setLayout(include '../views'.$view.'.php');
-
         include '../views/layouts/'.$this->getLayout().'.php';
     }
 
@@ -32,5 +29,4 @@ class View
     {
         define('CONTENT', $view);
     }
-
 }

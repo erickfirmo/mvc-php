@@ -1,21 +1,15 @@
 <?php
 
-
-
-
-
 class DBConnection
 {
-
     protected $config;
 
     public function __construct()
     {
         $this->setConfig();
-        $this->getPDOConnection();
+        return $this->getPDOConnection();
     }
 
-    
     public function getConfig($config)
     {
         return $this->config[$config];
@@ -24,20 +18,18 @@ class DBConnection
     public function getPDOConnection()
     {
         $dsn = 'mysql:host='.$this->getConfig('HOST').';dbname='.$this->getConfig('DB_NAME');
-
         try {
-            
             $pdo = new PDO($dsn, $this->getConfig('DB_USER'), $this->getConfig('DB_PASSWORD'));
-        
-        } catch(Exception $ex) {
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+            return $pdo;
+        } catch(PDOException $ex) {
             print 'Erro: '.$ex->getMessage();
-
         }
     }
 
     public function setConfig()
     {
-        $this->config = include 'Config.php';
+        $this->config = include 'DBConfig.php';
     }
 }

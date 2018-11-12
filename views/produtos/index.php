@@ -1,6 +1,9 @@
 
 <?php if(!defined('LAYOUT')) return 'app'; ?>
 <h1>TODOS OS PRODUTOS</h1>
+
+<?php alert(); ?>
+
 <ul>
 <?php
     foreach($produtos as $produto)

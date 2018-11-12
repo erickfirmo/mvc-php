@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 
+use Core\Request;
 use Core\View;
+use Core\Router;
 
 class Controller
 {
@@ -16,22 +18,19 @@ class Controller
         return (new View())->getViewResponse($view, $values);
     }
 
-    public function redirect($route)
+    public function request()
     {
-        $url = array_reverse(explode('/', $route));
-        if(defined('PARAMETER'))
-        {
-            if($url[0] == 'edit')
-            {
-                $redirect = '/'.$url[1].'/'.constant('PARAMETER').'/edit';
-            } elseif($url[0] == 'show') {
-                $redirect = '/'.$url[1].'/'.constant('PARAMETER');
-            }
-        }else{
-            $redirect = $route;
-        }
-
-        header('location:http://mvc.loc'.$redirect);
-            exit();
+        return new Request;
     }
+
+    public function route()
+    {
+        return new Router;
+    }
+
+    public function alert($alert)
+    {
+        return (new View())->alert($alert);
+    }
+
 }

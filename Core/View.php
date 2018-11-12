@@ -29,4 +29,9 @@ class View
     {
         define('CONTENT', $view);
     }
+
+    public function alert($alert)
+    {
+        $_SESSION['alert_success'] = $alert;
+    }
 }

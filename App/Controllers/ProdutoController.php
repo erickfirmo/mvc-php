@@ -24,11 +24,17 @@ class ProdutoController extends Controller
     public function store()
     {
         $produto = new Produto();
-        $produto->nome = $_POST['nome_produto'];
-        $produto->descricao = $_POST['descricao_produto'];
-        $produto->preco = $_POST['preco_produto'];
+        $this->request()->validate([
+            'nome_produto' => 'required|max:20',
+            'descricao_produto' => 'datatype:string',
+            'preco_produto' => 'required|min:2',
+        ]);
+        $produto->nome = $this->request()->input('nome_produto');
+        $produto->descricao = $this->request()->input('descricao_produto');
+        $produto->preco = $this->request()->input('preco_produto');
         $produto->save();
-        return $this->redirect('/produto/edit');
+        $this->alert('Produto salvo com sucesso !');
+        return $this->route()->redirect('/produto/edit');
     }
 
     public function show($id)
@@ -50,20 +56,27 @@ class ProdutoController extends Controller
     }
 
     public function update($id)
-    {
+    {  
+        $this->request()->validate([
+            'nome_produto' => 'required|max:20',
+            'descricao_produto' => 'datatype:string',
+            'preco_produto' => 'required|min:2',
+        ]);
         $produto = new Produto;
         $find = $produto->find($id);
         $produto->update([
-            'nome' => $_POST['nome_produto'],
-            'descricao' => $_POST['descricao_produto'],
-            'preco' => $_POST['preco_produto']
-            ]);
-        return $this->redirect('/produto/edit');
+            'nome' => $this->request()->input('nome_produto'),
+            'descricao' => $this->request()->input('descricao_produto'),
+            'preco' => $this->request()->input('preco_produto'),
+            ]); 
+        $this->alert('Produto atualizado com successo !');
+        return $this->route()->redirect('/produto/edit');
     }
 
     public function destroy($id)
     {
         $delete = (new Produto())->delete($id);
-        return $this->redirect('/produtos');
+        $this->alert('Produto removido com sucesso !');
+        return $this->route()->redirect('/produtos');
     }
 }

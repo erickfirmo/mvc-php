@@ -1,8 +1,15 @@
 <?php if(!defined('LAYOUT')) return 'app'; ?>
+<h1>Ver Produto</h1>
+<br>
+<?php alert(); ?>
 
-<h1>Show Produto</h1>
+<br>
+<form method="POST" action="<?php route('/produto/destroy'); ?>">
+    <input type="submit" value="Excluir">
+</form>
 
 <?php
 
-
-echo $_SERVER['REQUEST_METHOD'];
+echo $produto->nome.'<br>';
+echo $produto->descricao.'<br>';
+echo $produto->preco.'<br>';

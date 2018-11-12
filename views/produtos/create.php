@@ -1,6 +1,8 @@
 <?php if(!defined('LAYOUT')) return 'app'; ?>
 <h1>Cadastrar Produto</h1>
-<br>
+
+<?php alert(); ?>
+
 <form method="POST" action="/produto/store/">
     <label for="nome">Produto</label><br>
     <input type="text" name="nome_produto" id="nome"><br><br>

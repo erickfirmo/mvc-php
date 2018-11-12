@@ -160,4 +160,23 @@ class Router
     {
         return $this->root;
     }
+
+    public function redirect($route)
+    {
+        $url = array_reverse(explode('/', $route));
+        if(defined('PARAMETER'))
+        {
+            if($url[0] == 'edit')
+            {
+                $redirect = '/'.$url[1].'/'.constant('PARAMETER').'/edit';
+            } elseif($url[0] == 'show') {
+                $redirect = '/'.$url[1].'/'.constant('PARAMETER');
+            }
+        }else{
+            $redirect = $route;
+        }
+
+        header('location:http://mvc.loc'.$redirect);
+        exit();
+    }
 }

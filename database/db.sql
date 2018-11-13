@@ -12,4 +12,3 @@ CREATE TABLE produtos(
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
 );
-

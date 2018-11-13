@@ -19,6 +19,7 @@ class Router
     {
         $this->setRoutes();
         $this->setUrl();
+        $this->setName();
         if($this->hasParameter())
             $this->setParameter($this->getParameterIndex()); 
         if($this->validate())
@@ -60,7 +61,8 @@ class Router
         {
             $url = substr_replace($url,"",-1);
         }
-        $this->url = array_reverse(explode('/', ($url)));
+         
+        $this->url = array_reverse(explode('/', $url));
     }
 
     protected function getUrl()
@@ -72,6 +74,7 @@ class Router
     {
         $name = $this->getName();
         $routeName = str_replace($this->getParameter(),'$id', $name);
+
         return (array_key_exists($routeName.'/', $this->getRoutes()) || array_key_exists($routeName, $this->getRoutes())) ? true : false;
     }
     
@@ -122,9 +125,29 @@ class Router
         return $this->action;
     }
 
+    protected function setName()
+    {
+        $params = strstr($this->getUrlParam(0), 'page=');
+        $pageParam = explode('=', $params);
+        if(isset($pageParam[1]))
+        {
+            if(is_numeric($pageParam[1]) && is_numeric(substr($_SERVER['REQUEST_URI'], -1)))
+            {
+                    $name = str_replace('?page='.$pageParam[1], '', $_SERVER['REQUEST_URI']);
+                    $_SESSION['PAGE'] = $pageParam[1];
+            }
+
+        } else {
+            $_SESSION['PAGE'] = 1;
+            $name = $_SERVER['REQUEST_URI'];
+        }
+
+        $this->name = $name;
+    }
+
     protected function getName()
     {
-        return $_SERVER['REQUEST_URI'];
+        return $this->name;
     }
 
     protected function getNamespace()

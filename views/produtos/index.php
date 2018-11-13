@@ -14,6 +14,12 @@
 </ul>
 
 
+<?php
+
+pagination_links();
+
+
+
 
 
 

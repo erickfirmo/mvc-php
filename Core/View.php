@@ -4,6 +4,13 @@ namespace Core;
 
 class View
 {
+    public function __construct()
+    {
+        require_once __DIR__.'/../views/vendor/alert.php';
+        require_once __DIR__.'/../views/vendor/pagination.php';
+        require_once __DIR__.'/../helpers/route.php';
+    }
+    
     public function getViewResponse($view, $values=0)
     {
         if($values != NULL)

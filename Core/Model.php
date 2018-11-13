@@ -90,11 +90,11 @@ class Model
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $registers = $stmt->fetchAll(); 
-        $this->setPaginationLinks($registers);
+        $this->setPaginationLinks();
         return $registers;
     }
 
-    public function setPaginationLinks($registers)
+    public function setPaginationLinks()
     {
         if($this->getPaginate())
         {

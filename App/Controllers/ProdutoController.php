@@ -10,9 +10,7 @@ class ProdutoController extends Controller
     public function index()
     {
         $produtos = new Produto;
-        //$all = $produtos->paginate(10)->all();
-        $all = $produtos->all();
-
+        $all = $produtos->paginate(10)->all();
         return $this->view('/produtos/index',[
             'produtos' => $all
         ]);

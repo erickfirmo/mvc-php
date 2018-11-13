@@ -86,7 +86,7 @@ class Model
     public function all()
     {
         $db = $this->getPDOConnection();
-        $sql = 'SELECT * FROM '.$this->table.($this->getPaginate() ? ' LIMIT '.$this->getLimit() : '').($_SESSION['PAGE'] > 1 ? ' OFFSET ' .($_SESSION['PAGE']-1)*$this->getLimit() : '');
+        $sql = 'SELECT * FROM '.$this->table.($this->getPaginate() ? ' LIMIT '.$this->getLimit() : '').($_SESSION['PAGE'] > 1 && $this->getPaginate() ? ' OFFSET ' .($_SESSION['PAGE']-1)*$this->getLimit() : '');
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $registers = $stmt->fetchAll(); 
@@ -102,7 +102,7 @@ class Model
             $sql = 'SELECT * FROM '.$this->table;
             $stmt = $db->prepare($sql);
             $stmt->execute();
-            $_SESSION['PAGINATION_PAGES_NUMBER'] = count($stmt->fetchAll()) / $this->getLimit()-1;
+            $_SESSION['PAGINATION_PAGES_NUMBER'] = count($stmt->fetchAll()) / $this->getLimit();
         }
     }
 

@@ -8,7 +8,14 @@ class Request
     
     public function __construct()
     {
+        $this->checkToken();
+    }
 
+    public function checkToken()
+    {
+        if((isset($_POST['_token']) && empty($_POST['_token'])) || $_POST['_token'] != $_SESSION['_token']){
+            die('Requisição inválida');
+        }
     }
     
     public function input($inputName)

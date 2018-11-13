@@ -9,6 +9,7 @@ class View
         require_once __DIR__.'/../views/vendor/alert.php';
         require_once __DIR__.'/../views/vendor/pagination.php';
         require_once __DIR__.'/../helpers/route.php';
+        $this->tokenGenerator();
     }
     
     public function getViewResponse($view, $values=0)
@@ -20,6 +21,12 @@ class View
         $this->setView($view);
         $this->setLayout(include '../views'.$view.'.php');
         include '../views/layouts/'.$this->getLayout().'.php';
+    }
+
+    protected function tokenGenerator()
+    {
+        $_SESSION['_token'] = md5(uniqid(rand(), true));
+        require_once __DIR__.'/../views/vendor/token.php';
     }
 
     protected function setLayout($layout)

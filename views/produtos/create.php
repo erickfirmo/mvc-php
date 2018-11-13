@@ -4,6 +4,7 @@
 <?php alert(); ?>
 
 <form method="POST" action="/produto/store/">
+    <input type="hidden" name="_token" value=<?php token(); ?> >
     <label for="nome">Produto</label><br>
     <input type="text" name="nome_produto" id="nome"><br><br>
     <label for="descricao">Descrição</label><br>

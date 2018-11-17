@@ -8,9 +8,11 @@ use Core\Router;
 
 class Controller
 {
+    public $config;
+
     public function  __construct()
     {
-
+        $this->config = include '../config/app.php';
     }
 
     public function view($view, $values=0)

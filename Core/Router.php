@@ -114,7 +114,8 @@ class Router
         return $this->parameterIndex;
     }
 
-    protected function setAction(){
+    protected function setAction()
+    {
         $name = str_replace($this->getParameter(), '$id', $this->getName());
         $routeName = substr($name, -1) != '/' ? $name.'/' : $name;
         $this->action = $this->getRoutes()[$routeName]['action'];
@@ -141,7 +142,7 @@ class Router
             $_SESSION['PAGE'] = 1;
             $name = $_SERVER['REQUEST_URI'];
         }
-
+        
         $this->name = $name;
     }
 
@@ -199,7 +200,7 @@ class Router
             $redirect = $route;
         }
 
-        header('location:http://mvc.loc'.$redirect);
+        header('location:'.$this->config['APP_URL'].$redirect);
         exit();
     }
 }

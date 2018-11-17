@@ -30,6 +30,6 @@ class DBConnection
 
     public function setConfig()
     {
-        $this->config = include 'DBConfig.php';
+        $this->config = include '../config/database.php';
     }
 }

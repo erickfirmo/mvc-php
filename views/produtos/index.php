@@ -8,7 +8,7 @@
 <?php
     foreach($produtos as $produto)
     {
-        echo '<li><a href="/produto/'.$produto['id'].'/edit">'.$produto['nome'].'</a></li>';
+        echo '<li><a href="/produto/'.$produto->id.'/edit">'.$produto->nome.'</a></li>';
     }
 ?>
 </ul>

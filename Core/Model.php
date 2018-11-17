@@ -8,8 +8,6 @@ class Model
 {
     public $paginate = false;
     public $limit = false;
-    public $offset = false;
-    public $where = false;
 
     public function __construct()
     {
@@ -85,44 +83,87 @@ class Model
 
     public function all()
     {
+        $this->query = 'SELECT * FROM '.$this->table;
         $db = $this->getPDOConnection();
-        $sql = 'SELECT * FROM '.$this->table.($this->getPaginate() ? ' LIMIT '.$this->getLimit() : '').($_SESSION['PAGE'] > 1 && $this->getPaginate() ? ' OFFSET ' .($_SESSION['PAGE']-1)*$this->getLimit() : '');
-        $stmt = $db->prepare($sql);
+        $stmt = $db->prepare($this->query);
         $stmt->execute();
-        $registers = $stmt->fetchAll(); 
-        $this->setPaginationLinks();
+        $registers = $stmt->fetchAll(\PDO::FETCH_OBJ);
+        
+        if($this->paginate)
+        {
+            $this->setPagination($registers);
+            $sql = 'SELECT * FROM '.$this->table;
+            
+            $sql = $sql.' LIMIT '.$this->getLimit();
+            if($_SESSION['PAGE'] > 1)
+            {
+                $sql = $sql.' OFFSET '.($_SESSION['PAGE'] - 1)*$this->getLimit();
+            }
+            $db = $this->getPDOConnection();
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+            $registers = $stmt->fetchAll(\PDO::FETCH_OBJ);
+        }
         return $registers;
     }
 
-    public function setPaginationLinks()
+    public function where($condition)
     {
-        if($this->getPaginate())
+
+        $sql = 'SELECT * FROM '.$this->table.' WHERE '.$condition;
+        $db = $this->getPDOConnection();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $registers = $stmt->fetchAll(\PDO::FETCH_OBJ);
+
+        if($this->paginate)
         {
+            $this->setPagination($registers);
+            $sql = 'SELECT * FROM '.$this->table.' WHERE '.$condition;
+            
+            $sql = $sql.' LIMIT '.$this->getLimit();
+            if($_SESSION['PAGE'] > 1)
+            {
+                $sql = $sql.' OFFSET '.($_SESSION['PAGE'] -1)*$this->getLimit();
+            }
             $db = $this->getPDOConnection();
-            $sql = 'SELECT * FROM '.$this->table;
             $stmt = $db->prepare($sql);
             $stmt->execute();
-            $_SESSION['PAGINATION_PAGES_NUMBER'] = count($stmt->fetchAll()) / $this->getLimit();
+            $registers = $stmt->fetchAll(\PDO::FETCH_OBJ);
         }
+
+
+
+        return $registers;
     }
 
-    public function getPaginate()
+    public function setPagination($registers)
     {
-        return $this->paginate;
+        $_SESSION['PAGES_NUMBER'] = count($registers) / $this->getLimit();
     }
 
-    public function getLimit()
-    {
-        return $this->limit;
-    }
-
-    public function paginate($number)
+    public function paginate($limit)
     {
         $this->paginate = true;
         $_SESSION['PAGINATE'] = true;
-        $this->limit = $number;
+
+        $this->limit = $limit;
         return $this;
     }
+     
+    public function getLimit()
+    {
+
+        return $this->limit;
+    }
+
+     
+
+    
+
+   
+
+    
 
     public function delete($id)
     {

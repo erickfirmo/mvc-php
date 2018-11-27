@@ -3,6 +3,6 @@
 return [
     'APP_NAME' => 'MVC-PHP',
 
-    'APP_URL' => 'http://mvc.loc'
+    'APP_URL' => 'http://dividas.loc'
 
 ];

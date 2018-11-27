@@ -7,9 +7,5 @@ if(!defined('LAYOUT')) return 'admin';
 
 ?>
 
+<h1>Cliente <?php echo $cliente->nome; ?></h1>
 
-
-
-
-
-<h1>CRUD de clientes e suas dívidas</h1>

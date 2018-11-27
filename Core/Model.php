@@ -104,6 +104,7 @@ class Model
             $stmt->execute();
             $registers = $stmt->fetchAll(\PDO::FETCH_OBJ);
         }
+
         return $registers;
     }
 
@@ -132,8 +133,6 @@ class Model
             $registers = $stmt->fetchAll(\PDO::FETCH_OBJ);
         }
 
-
-
         return $registers;
     }
 
@@ -157,14 +156,6 @@ class Model
         return $this->limit;
     }
 
-     
-
-    
-
-   
-
-    
-
     public function delete($id)
     {
         $db = $this->getPDOConnection();
@@ -172,6 +163,38 @@ class Model
         $stmt = $db->prepare($sql);
         $stmt->execute();
     }
+
+    /* -- */
+
+    
+    //clientes hasMany dividas
+
+    public function hasMany()
+    {
+        $db = $this->getPDOConnection();
+        $sql = 'SELECT '.$this->table.'*, '.$many.'';
+    }
+
+    //dividas belongsTo clientes;
+
+    public function belongsTo()
+    {
+
+    }
+
+    public function belongsToMany()
+    {
+
+    }
+
+
+
+    
+
+
+
+
+
 }
 
     

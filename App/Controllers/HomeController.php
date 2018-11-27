@@ -6,9 +6,9 @@ use App\Controllers\Controller;
 
 class HomeController extends Controller 
 {
-    public function home()
+    public function index()
     {
-        return $this->view('home');
+        return $this->view('/index');
     }
 
     

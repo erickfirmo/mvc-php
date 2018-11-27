@@ -1,7 +1,5 @@
 <?php
-
 namespace Core;
-
 class Request
 {
     public $status = true;
@@ -10,7 +8,6 @@ class Request
     {
         $this->checkToken();
     }
-
     public function checkToken()
     {
         if((isset($_POST['_token']) && empty($_POST['_token'])) || $_POST['_token'] != $_SESSION['_token']){
@@ -23,7 +20,6 @@ class Request
         if(isset($_POST[$inputName]))
             return $_POST[$inputName];
     }
-
     public function validate(array $rules)
     {
         $alerts = [];
@@ -38,7 +34,6 @@ class Request
                 array_push($alerts, $this->$rAction($inputName, $rParam));    
             }   
         }
-
         if($this->status == false)
         {
             $_SESSION['alert_error'] = $alerts;
@@ -46,7 +41,6 @@ class Request
             exit();
         }
     }
-
     public function required($inputName, $param=0)
     {
         if(!isset($_POST[$inputName]) || empty($_POST[$inputName]))
@@ -55,7 +49,6 @@ class Request
             return 'O campo '.$inputName.' é obrigatório.';
         }
     }
-
     public function max($inputName, $max)
     {
         if($max < strlen($_POST[$inputName]))
@@ -64,7 +57,6 @@ class Request
             return 'O campo '.$inputName.' não deve ter mais que '.$max.' caracteres.';
         }
     }
-
     public function min($inputName, $min)
     {
         if($min > strlen($_POST[$inputName]))
@@ -73,7 +65,6 @@ class Request
             return 'O campo '.$inputName.' deve ter mais que '.$min.' caracteres.';
         }
     }
-
     public function datatype($inputName, $type)
     {
         if($type != gettype($_POST[$inputName]))

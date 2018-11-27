@@ -9,7 +9,7 @@ return [
 
     'DB_PASSWORD' => '',
 
-    'DB_NAME' => 'cadastros',
+    'DB_NAME' => 'dividas',
 
     'DB_DRIVER' => 'mysql',
 

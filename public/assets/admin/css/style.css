@@ -1,0 +1,31 @@
+body {
+  background-color: #f8f8f8; }
+
+.btn {
+  border-radius: 0; }
+
+.sidebar {
+  background-color: #fff;
+  width: 255px;
+  position: absolute;
+  display: inline-block;
+  top: 0;
+  bottom: 0;
+  box-shadow: 2px 0px 2px #ddd; }
+  .sidebar img {
+    height: 210px;
+    max-width: 210px;
+    margin: 22.5px; }
+  .sidebar a {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    color: #ddd; }
+  .sidebar .active {
+    background-color: #dc3545;
+    box-shadow: 0px 2px 1px #ddd; }
+
+.content {
+  padding: .75rem 1.25rem;
+  margin-left: 255px; }
+
+/*# sourceMappingURL=style.css.map */

@@ -4,51 +4,85 @@
 
 
 return [
+
     '/' => [
-        'action' => 'SiteController@index',
+        'action' => 'HomeController@index',
+        'method' => 'GET'
+    ],
+
+    '/clientes/' => [
+        'action' => 'ClienteController@index',
         'method' => 'GET'
     ],
     
-    '/contato/' => [
-        'action' => 'SiteController@contato',
+    '/clientes/create/' => [
+        'action' => 'ClienteController@create',
+        'method' => 'GET'
+    ],
+    
+    '/clientes/store/' => [
+        'action' => 'ClienteController@store',
+        'method' => 'POST'
+    ],
+
+    '/clientes/$id/' => [
+        'action' => 'ClienteController@show',
         'method' => 'GET'
     ],
 
-    '/produto/create/' => [
-        'action' => 'ProdutoController@create',
+    '/clientes/$id/edit/' => [
+        'action' => 'ClienteController@edit',
         'method' => 'GET'
     ],
 
-    '/produto/store/' => [
-        'action' => 'ProdutoController@store',
+    '/clientes/$id/update/' => [
+        'action' => 'ClienteController@update',
+        'method' => 'POST'
+    ],
+
+    '/clientes/$id/destroy/' => [
+        'action' => 'ClienteController@destroy',
+        'method' => 'POST'
+    ],
+
+
+    
+    '/dividas/' => [
+        'action' => 'DividaController@index',
+        'method' => 'GET'
+    ],
+    
+    '/dividas/create/' => [
+        'action' => 'DividaController@create',
+        'method' => 'GET'
+    ],
+    
+    '/dividas/store/' => [
+        'action' => 'DividaController@store',
+        'method' => 'POST'
+    ],
+
+    '/dividas/$id/' => [
+        'action' => 'DividaController@show',
+        'method' => 'GET'
+    ],
+
+    '/dividas/$id/edit/' => [
+        'action' => 'DividaController@edit',
+        'method' => 'GET'
+    ],
+
+    '/dividas/$id/update/' => [
+        'action' => 'DividaController@update',
+        'method' => 'POST'
+    ],
+
+    '/dividas/$id/destroy/' => [
+        'action' => 'DividaController@destroy',
         'method' => 'POST'
     ],
     
-    '/produto/$id/edit/' => [
-        'action' => 'ProdutoController@edit',
-        'method' => 'GET'
-    ],
 
-
-    '/produto/$id/update/' => [
-        'action' => 'ProdutoController@update',
-        'method' => 'POST'
-    ],
-
-    '/produto/$id/destroy/' => [
-        'action' => 'ProdutoController@destroy',
-        'method' => 'POST'
-    ],
-
-    '/produto/$id/' => [
-        'action' => 'ProdutoController@show',
-        'method' => 'GET'
-    ],
-
-    '/produtos/' => [
-        'action' => 'ProdutoController@index',
-        'method' => 'GET'
-    ],
-
+    
 ];
 

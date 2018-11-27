@@ -1,18 +1,14 @@
 <?php 
 
-section('title', 'Home');
-section('description', 'Crud de clientes e suas dívidas.');
+section('title', 'MVC PHP | Cliente');
+section('description', 'Editar cliente');
 
 if(!defined('LAYOUT')) return 'admin';
 
 ?>
 
-<h1>Editar Cliente</h1>
-
-<div class="container-fluid">
-    <div class="row">
         <div class="col-md-3"></div>
-        <div class="col-md-6">
+        <div class="box col-md-6">
             <?php alert(); ?>
             <form method="POST" action="<?php route('/clientes/update'); ?>">
                 <input type="hidden" name="_token" value="<?php token(); ?>">
@@ -56,5 +52,4 @@ if(!defined('LAYOUT')) return 'admin';
         </div>
         <div class="col-md-3"></div>
     
-    </div>
-</div>
+    

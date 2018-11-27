@@ -1,27 +1,18 @@
 
-$primaryColor:#fff;
+$primaryColor: red;
 ///#585858;
-$secondaryColor: #EEE;
+$secondaryColor: #FFF;
 $sidebar-width: 255px;
-$profile-image-width: 210px;
-
-body {
-    background-color: rgb(248, 248, 248);
-}
-
-.btn {
-    border-radius: 0;
-}
-
+$profile-image-width: 180px;
 
 .sidebar {
-    background-color: $primaryColor;
+    background-color: $secondaryColor;
     width: $sidebar-width;
     position: absolute;
     display: inline-block;
     top: 0;
     bottom: 0;
-    box-shadow: 2px 0px 2px #ddd;
+    box-shadow: 1px 0px 1px #CCC;
     img {
         height: $profile-image-width;
         max-width: $profile-image-width;
@@ -30,15 +21,30 @@ body {
     a {
         background-color: rgba(0,0,0,0);
         border: none;
-        color: #ddd;
+        color: #515151;
+        font-weight: 500;
+        font-size: 16px;
+        i {
+            font-size: 14px;
+            margin-right: 6px;
+        }
     }
-    .active {
-        background-color: #dc3545;
-        box-shadow: 0px 2px 1px #ddd;
-    }
+}
+
+.box {
+    background-color: $secondaryColor;
+    padding: 26px;
+    box-shadow: 0px 1px 4px #CCC;
 }
 
 .content {
     padding: .75rem 1.25rem;
     margin-left: $sidebar-width;
 }
+
+.content-header {
+    padding: .75rem 1.25rem;
+    margin-left: $sidebar-width;
+    margin-bottom: 32px;
+}
+

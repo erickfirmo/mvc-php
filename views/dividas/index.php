@@ -1,16 +1,12 @@
 <?php 
 
-section('title', 'Home');
-section('description', 'Crud de clientes e suas dívidas.');
+section('title', 'MVC PHP | Dívidas');
+section('description', 'Todas as dívidas');
 
 if(!defined('LAYOUT')) return 'admin';
 
 ?>
 
-<h1>Dívidas</h1>
-
-<div class="container-fluid">
-    <div class="row">
         <div class="col-md-12">
             <div class="table-responsive">
                 <table class="table">
@@ -42,5 +38,5 @@ if(!defined('LAYOUT')) return 'admin';
                 </table>
             </div>
         </div>
-    </div>
-</div>
+
+<?php pagination_links(); ?>

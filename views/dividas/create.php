@@ -1,17 +1,14 @@
 <?php 
 
-section('title', 'Home');
-section('description', 'Crud de clientes e suas dívidas.');
+section('title', 'MVC PHP | Dívidas');
+section('description', 'Cadastrar dívida');
 
 if(!defined('LAYOUT')) return 'admin';
 
 ?>
 
-<h1>Cadastrar Dívida</h1>
-<div class="container-fluid">
-    <div class="row">
         <div class="col-md-3"></div>
-        <div class="col-md-6">
+        <div class="box col-md-6">
             <?php alert(); ?>
             <form method="POST" action="<?php route('/dividas/store'); ?>">
                 <input type="hidden" name="_token" value="<?php token(); ?>">
@@ -41,5 +38,3 @@ if(!defined('LAYOUT')) return 'admin';
         <div class="col-md-3"></div>
 
         
-    </div>
-</div>

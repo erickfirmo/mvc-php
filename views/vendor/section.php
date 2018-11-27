@@ -1,11 +1,9 @@
 <?php
 
-function section($param, $value)
+function section($param, $value=NULL)
 {
-    if(!defined('section@'.$param))
-    {
+    if($value == NULL)
+        echo constant('section@'.$param);
+    elseif(!defined('section@'.$param))
         define('section@'.$param, $value);
-    }
-
-
 }

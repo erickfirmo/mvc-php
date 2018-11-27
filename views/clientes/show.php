@@ -1,7 +1,7 @@
 <?php 
 
-section('title', 'Home');
-section('description', 'Crud de clientes e suas dívidas.');
+section('title', 'MVC PHP | Cliente');
+section('description', 'Informações do cliente');
 
 if(!defined('LAYOUT')) return 'admin';
 

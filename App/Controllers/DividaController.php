@@ -10,7 +10,7 @@ class DividaController extends Controller
 {
     public function index()
     {
-        $dividas = (new Divida())->all();
+        $dividas = (new Divida())->paginate(2)->all();
         return $this->view('/dividas/index', [
             'dividas' => $dividas
         ]);

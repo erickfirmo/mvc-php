@@ -9,7 +9,7 @@ class ClienteController extends Controller
 {
     public function index()
     {
-        $clientes = (new Cliente())->all();
+        $clientes = (new Cliente())->paginate(2)->all();
         
         return $this->view('/clientes/index', [
             'clientes' => $clientes

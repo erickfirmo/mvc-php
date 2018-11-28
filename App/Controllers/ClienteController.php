@@ -66,10 +66,6 @@ class ClienteController extends Controller
 
     public function update($id)
     {
-
-        $c = new Cliente;
-        $cliente = $c->find($id);
-
         $nome = $this->request()->input('nome');
         $sobrenome = $this->request()->input('sobrenome');
         $nascimento = $this->request()->input('nascimento');
@@ -77,7 +73,7 @@ class ClienteController extends Controller
         $cpf = $this->request()->input('cpf');
         $sexo = $this->request()->input('sexo');
 
-        $cliente = (new Cliente())->update([
+        $cliente = (new Cliente())->update($id, [
             'nome' => $nome,
             'sobrenome' => $sobrenome,
             'nascimento' => $nascimento,

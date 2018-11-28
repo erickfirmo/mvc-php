@@ -53,14 +53,17 @@ class Model
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $row = $stmt->fetchObject();
+        
         if(!$row)
             die('Nothing Found');
         else
             return $row;
+
     }
 
-    public function update(array $updates)
+    public function update($id, array $updates)
     {    
+        define('PARAMETER', $id);
         $fields = NULL;
         foreach ($this->fields as $key => $field)
         {
@@ -72,7 +75,7 @@ class Model
             }
         }
         $db = $this->getPDOConnection();
-        $sql = 'UPDATE '.$this->table.' SET '.$fields.' WHERE id='.constant('PARAMETER');
+        $sql = 'UPDATE '.$this->table.' SET '.$fields.' WHERE id='.$id;
         $stmt = $db->prepare($sql);
         foreach ($updates as $key => $update)
         {  

@@ -14,12 +14,15 @@ class Router
     protected $namespace = 'App\Controllers\\';
     protected $parameter;
     protected $parameterIndex;
+    protected $config;
 
     public function __construct()
     {
         $this->setRoutes();
         $this->setUrl();
         $this->setName();
+        $this->setConfig();
+
         if($this->hasParameter())
             $this->setParameter($this->getParameterIndex()); 
         if($this->validate())
@@ -185,9 +188,27 @@ class Router
         return $this->root;
     }
 
+    public function setConfig()
+    {
+        $this->config = (include '../config/app.php');
+
+    }
+
+    public function getConfig($index)
+    {
+        return $this->config[$index];
+    }
+
+
     public function redirect($route)
     {
         $url = array_reverse(explode('/', $route));
+
+        echo 'I am here';
+
+        $redirect = '';
+
+
         if(defined('PARAMETER'))
         {
             if($url[0] == 'edit')
@@ -195,12 +216,15 @@ class Router
                 $redirect = '/'.$url[1].'/'.constant('PARAMETER').'/edit';
             } elseif($url[0] == 'show') {
                 $redirect = '/'.$url[1].'/'.constant('PARAMETER');
+                
             }
         }else{
             $redirect = $route;
+            
+            
         }
 
-        header('location:'.$this->config['APP_URL'].$redirect);
+        header('location:'.$this->getConfig('APP_URL').$redirect);
         exit();
     }
 }

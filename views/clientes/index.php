@@ -43,4 +43,4 @@ if(!defined('LAYOUT')) return 'admin';
             </div>
         </div>
 
-<?php pagination_links(); ?>
+<?php pagination_links(['class' => 'pagination']); ?>

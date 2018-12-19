@@ -5,36 +5,38 @@ namespace App\Controllers;
 use App\Controllers\Controller;
 use App\Divida;
 use App\Cliente;
+use App\DividaDoCliente;
+
+
 
 class DividaController extends Controller 
 {
     public function index()
     {
         $dividas = (new Divida())->paginate(2)->all();
+
         return $this->view('/dividas/index', [
             'dividas' => $dividas
         ]);
     }
 
+    
+
     public function create()
     {
         $clientes = (new Cliente())->all();
-        return $this->view('/dividas/create', [
-            'clientes' => $clientes
 
-        ]);
+        return $this->view('/dividas/create');
     }
 
     public function store()
     {
         $divida = new Divida;
-
         $divida->valor = $this->request()->input('valor');
         $divida->vencimento = $this->request()->input('vencimento');
-        $divida->cliente_id = $this->request()->input('cliente_id');
         $divida->save();
 
-        $this->alert('Dívida cadastrada com sucesso !');
+        $this->alert('success', 'Dívida cadastrada com sucesso !');
         return $this->route()->redirect('/dividas/edit');
     }
 
@@ -42,6 +44,7 @@ class DividaController extends Controller
     {
         $divida = (new Divida())->find($id);
         $clientes = (new Cliente())->all();
+
 
         return $this->view('/dividas/edit', [
             'divida' => $divida,
@@ -64,21 +67,23 @@ class DividaController extends Controller
     {
         $valor = $this->request()->input('valor');
         $vencimento = $this->request()->input('vencimento');
-        $cliente_id = $this->request()->input('cliente_id');
-
-        $divida = (new Divida())->update($id, [
+        $divida (new Divida())->find($id);
+        $divida->update([
             'valor' => $valor,
-            'vencimento' => $vencimento,
-            'cliente_id' => $cliente_id
+            'vencimento' => $vencimento
         ]);
+
         
-        $this->alert('Dívida atualizada com sucesso !');
+        $this->alert('success', 'Dívida atualizada com sucesso !');
         return $this->route()->redirect('/dividas/edit');
     }
 
     public function destroy($id)
     {
         $delete = (new Divida())->delete($id);
+        $this->alert('success', 'Dívida removida com sucesso !');
+        return $this->route()->redirect('/dividas');
+
     }
 
     

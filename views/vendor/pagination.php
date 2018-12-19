@@ -23,7 +23,7 @@ function pagination_links($property)
             $page_link++;
             echo '<li class="page-item '.($page == $page_link ? 'active' : '').'"><a class="page-link" href="?page='.$page_link.'">'.$page_link.'</a></li>';
         }
-        echo '<li class="page-item'.($page == $n_pages ? ' disabled' : '').'">
+        echo '<li class="page-item'.($page >= $n_pages ? ' disabled' : '').'">
         <a class="page-link" href="?page='.$next.'" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
         <span class="sr-only">Next</span>

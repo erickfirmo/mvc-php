@@ -3,11 +3,14 @@
 namespace App;
 
 use Core\Model;
+use App\Divida;
+use App\DividaDoCliente;
 
 class Cliente extends Model
 {
     public $table = 'clientes';
 
+    public $id;
     public $nome;
     public $sobrenome;
     public $nascimento;
@@ -21,6 +24,13 @@ class Cliente extends Model
         'nascimento',
         'rg',
         'cpf',
-        'sexo'
+        'sexo',
     ];
+
+    public function dividas()
+    {
+        return $this->belongsToMany(new Divida, new DividaDoCliente, 'cliente_id', 'divida_id');
+    }
+
+
 }

@@ -30,13 +30,19 @@ class Request
             {
                 $rArray = explode(':', $r);
                 $rAction = $rArray[0];   
-                $rParam = $rArray[1];     
-                array_push($alerts, $this->$rAction($inputName, $rParam));    
+                $rParam = $rArray[1];   
+                $isValid = $this->$rAction($inputName, $rParam);
+
+                if(isset($isValid) && $isValid != false)
+                {
+                    array_push($alerts, $isValid);    
+                }
+                
             }   
         }
         if($this->status == false)
         {
-            $_SESSION['alert_error'] = $alerts;
+            $_SESSION['alert-error'] = $alerts;
             header('location: '.$_SERVER['HTTP_REFERER']);
             exit();
         }
@@ -55,6 +61,8 @@ class Request
         {
             $this->status = false;
             return 'O campo '.$inputName.' não deve ter mais que '.$max.' caracteres.';
+        } else {
+            return false;
         }
     }
     public function min($inputName, $min)
@@ -63,6 +71,8 @@ class Request
         {
             $this->status = false;
             return 'O campo '.$inputName.' deve ter mais que '.$min.' caracteres.';
+        }  else {
+            return false;
         }
     }
     public function datatype($inputName, $type)
@@ -71,6 +81,8 @@ class Request
         {
             $this->status = false;
             return 'O campo '.$inputName.' deve ser do tipo '.$type.'.';
+        }  else {
+            return false;
         }
     }
 }

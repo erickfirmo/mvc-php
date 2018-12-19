@@ -6,38 +6,87 @@ section('description', 'Editar dívida');
 if(!defined('LAYOUT')) return 'admin';
 
 ?>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3"></div>
+            <div class="box col-md-6">
+                <form method="POST" action="<?php route('/dividas/update'); ?>">
+                    <input type="hidden" name="_token" value="<?php token(); ?>">
+                    <label for="valor">
+                        Valor
+                        <input type="text" name="valor" id="valor" value="<?php echo $divida->valor; ?>" class="form-control">
+                    </label>
+                    <br>
+                    <label for="vencimento">
+                        Vencimento
+                        <input type="date" name="vencimento" id="vencimento" value="<?php echo $divida->vencimento; ?>" class="form-control">    
+                    </label>
+                    <br>
+                    <input type="submit" value="Salvar Alterações" class="btn btn-primary">
+                </form>
+                <br>
+                <form method="POST" action="<?php route('/dividas/destroy'); ?>">
+                    <input type="submit" value="Excluir" class="btn btn-danger">
+                </form>
+            </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
 
-        <div class="col-md-3"></div>
-        <div class="box col-md-6">
-            <?php alert(); ?>
-            <form method="POST" action="<?php route('/dividas/update'); ?>">
-                <input type="hidden" name="_token" value="<?php token(); ?>">
-                <label for="valor">
-                Valor
-                <input type="text" name="valor" id="valor" value="<?php echo $divida->valor; ?>" class="form-control">
-                </label>
-                <br>
-                <label for="vencimento">
-                Vencimento
-                <input type="date" name="vencimento" id="vencimento" value="<?php echo $divida->vencimento; ?>" class="form-control">    
-                </label>
-                <br>
-                <label for="cliente_id">Cliente</label>
-                <select name="cliente_id" id="cliente_id" class="form-control">
-                <?php
-                foreach($clientes as $cliente)
-                {
-                echo '<option '.($cliente->id == $divida->cliente_id ? 'selected="selected"' : '').'value="'.$cliente->id.'">'.$cliente->nome.'</option>';
-                }
-                ?>
-                </select>
-                <br>
-                <input type="submit" value="Salvar Alterações" class="btn btn-primary">
-            </form>
-            <br>
-            <form method="POST" action="<?php route('/dividas/destroy'); ?>">
-                <input type="submit" value="Excluir" class="btn btn-danger">
-            </form>
+
+<h3>Devedores</h3>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nome</th>
+                            <th>Nascimento</th>
+                            <th>Sexo</th>
+                            <th>RG</th>
+                            <th>CPF</th>
+                            <th>Nº de Dívidas</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <?php
+                            
+                            foreach ($divida->clientes() as $key => $cliente)
+                            {
+                                echo '<tr>';
+                                echo '<td>'.$cliente->id.'</td>';
+                                echo '<td>'.$cliente->nome.' '.$cliente->sobrenome.'</td>';
+                                echo '<td>'.$cliente->nascimento.'</td>';
+                                echo '<td>'.$cliente->sexo.'</td>';
+                                echo '<td>'.$cliente->rg.'</td>';
+
+                                echo '<td>'.$cliente->cpf.'</td>';
+
+                                echo '<td>'.count($cliente->dividas()).'</td>';
+
+
+                                echo '<td><a href="/clientes/'.$cliente->id.'/edit/"><button class="btn btn-light">Ver/Editar</button></a>
+                                <form method="POST" action="/dividasdocliente/'.$cliente->pivot()->id.'/destroy/">
+                                    <input type="submit" value="Remover" class="btn btn-danger">
+                                </form>
+                                </td>';
+                                echo '</tr>';
+                            }
+                            
+
+                            ?>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="col-md-3"></div>
+    </div>
+</div>
+        
         

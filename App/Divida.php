@@ -3,18 +3,26 @@
 namespace App;
 
 use Core\Model;
+use App\Divida;
+use App\Cliente;
+use App\DividaDoCliente;
 
 class Divida extends Model
 {
     public $table = 'dividas';
 
+    public $id;
     public $valor;
     public $vencimento;
-    public $cliente_id;
-
     public $fields = [
         'valor',
         'vencimento',
-        'cliente_id'
     ];
+
+    public function clientes()
+    {
+        return $this->belongsToMany(new Cliente, new DividaDoCliente, 'divida_id', 'cliente_id');
+    }
+
+    
 }

@@ -7,9 +7,10 @@ if(!defined('LAYOUT')) return 'admin';
 
 ?>
 
+<div class="container-fluid">
+    <div class="row">
         <div class="col-md-3"></div>
         <div class="box col-md-6">
-            <?php alert(); ?>
             <form method="POST" action="<?php route('/clientes/store'); ?>">
                 <input type="hidden" name="_token" value="<?php token(); ?>">
                 <label for="nome">
@@ -47,3 +48,5 @@ if(!defined('LAYOUT')) return 'admin';
             </form>
         </div>
         <div class="col-md-3"></div>
+    </div>
+</div>

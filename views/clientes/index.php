@@ -7,6 +7,8 @@ if(!defined('LAYOUT')) return 'admin';
 
 ?>
 
+<div class="container-fluid">
+    <div class="row">
         <div class="col-md-12">
             <div class="table-responsive">
                 <table class="table">
@@ -32,10 +34,12 @@ if(!defined('LAYOUT')) return 'admin';
                                 echo '<td>'.($cliente->sexo == 'M' ? 'Masculino' : 'Feminino').'</td>';
                                 echo '<td>'.$cliente->rg.'</td>';
                                 echo '<td>'.$cliente->cpf.'</td>';
-                                echo '<td>'.'numero de dividas'.'</td>';
+                                echo '<td>'.count($cliente->dividas()).'</td>';
                                 echo '<td><a href="/clientes/'.$cliente->id.'/edit/"><button class="btn btn-light">Ver/Editar</button></a></td>';
                                 echo '</tr>';
+                                
                             }
+
                             ?>
                         </tr>
                     </tbody>
@@ -43,4 +47,7 @@ if(!defined('LAYOUT')) return 'admin';
             </div>
         </div>
 
-<?php pagination_links(['class' => 'pagination']); ?>
+        <?php //pagination_links(['class' => 'pagination']); ?>
+        
+    </div>
+</div>

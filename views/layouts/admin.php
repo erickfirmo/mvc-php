@@ -31,6 +31,8 @@
 
 
 <section class="content">
+    <?php alert(); ?>
+
     <div class="container-fluid">
         <div class="row">
                 <?php include '../views'.constant('CONTENT').'.php'; ?>

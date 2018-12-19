@@ -19,7 +19,14 @@ CREATE TABLE dividas(
     id INT NOT NULL AUTO_INCREMENT,
     valor DECIMAL(8, 2) NOT NULL,
     vencimento date NOT NULL,
+    PRIMARY KEY(id)
+) DEFAULT CHARSET = 'utf8';
+
+CREATE TABLE dividas_dos_clientes(
+    id INT NOT NULL AUTO_INCREMENT,
     cliente_id INT NOT NULL,
+    divida_id INT NOT NULL,
     PRIMARY KEY(id),
-    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id) ON DELETE CASCADE,
+    FOREIGN KEY (divida_id) REFERENCES dividas(id) ON DELETE CASCADE
 ) DEFAULT CHARSET = 'utf8';

@@ -3,29 +3,30 @@
 function alert()
 {
     
-    if(isset($_SESSION['alert_error']))
+    if(isset($_SESSION['alert-error']))
     {
-        if($_SESSION['alert_error'] != NULL)
+        if($_SESSION['alert-error'] != NULL)
         {
-            $msg = $_SESSION['alert_error'];
-            foreach($msg as $alert)
+            foreach($_SESSION['alert-error'] as $error)
             {
-                echo '<p>'.$alert.'</p>';
+                echo '<div class="alert alert-danger" role="alert">'.$error.'<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button></div>';
             }
         }
     }
 
-    if(isset($_SESSION['alert_success']))
+    if(isset($_SESSION['alert-success']))
     {
-        if($_SESSION['alert_success'] != NULL)
+        if($_SESSION['alert-success'] != NULL)
         {
-            echo '<p>'.$_SESSION['alert_success'].'</p>';
+            echo '<div class="alert alert-success" role="alert">'.$_SESSION['alert-success'].'<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button></div>';
         }
     }
 
-
-
-    $_SESSION['alert_error'] = NULL;
-    $_SESSION['alert_success'] = NULL;
+    $_SESSION['alert-error'] = NULL;
+    $_SESSION['alert-success'] = NULL;
 
 }

@@ -15,7 +15,7 @@ class Router
     protected $parameter;
     protected $parameterIndex;
     protected $config;
-
+    
     public function __construct()
     {
         $this->setRoutes();
@@ -46,6 +46,8 @@ class Router
         elseif(!is_numeric($this->getUrlParam(0)))
             (new $controller())->$method();
     }
+
+    
 
     protected function setRoutes()
     {
@@ -100,6 +102,7 @@ class Router
     protected function setParameter($parameterIndex)
     {
         $this->parameter = $this->getUrlParam($parameterIndex);
+        define('PARAMETER', $this->parameter);
     }
 
     protected function getParameter()
@@ -204,11 +207,6 @@ class Router
     {
         $url = array_reverse(explode('/', $route));
 
-        echo 'I am here';
-
-        $redirect = '';
-
-
         if(defined('PARAMETER'))
         {
             if($url[0] == 'edit')
@@ -223,8 +221,17 @@ class Router
             
             
         }
-
+        
         header('location:'.$this->getConfig('APP_URL').$redirect);
         exit();
     }
+
+    public function back()
+    {
+        header('location:'.$_SERVER['HTTP_REFERER']);
+        exit();
+    }
+
+
+    
 }

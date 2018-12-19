@@ -30,9 +30,9 @@ class Controller
         return new Router;
     }
 
-    public function alert($alert)
+    public function alert($status, $alert)
     {
-        return (new View())->alert($alert);
+        return (new View())->alert($status, $alert);
     }
 
 }

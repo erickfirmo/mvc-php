@@ -7,9 +7,3 @@ if(!defined('LAYOUT')) return 'admin';
 
 ?>
 
-
-
-
-
-
-<h1>CRUD de clientes e suas dívidas</h1>

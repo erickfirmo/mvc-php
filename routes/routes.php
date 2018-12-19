@@ -81,6 +81,16 @@ return [
         'action' => 'DividaController@destroy',
         'method' => 'POST'
     ],
+
+    '/dividasdocliente/add/' => [
+        'action' => 'DividaDoClienteController@add',
+        'method' => 'POST'
+    ],
+
+    '/dividasdocliente/$id/destroy/' => [
+        'action' => 'DividaDoClienteController@destroy',
+        'method' => 'POST'
+    ],
     
 
     

@@ -4,15 +4,16 @@ namespace App\Controllers;
 
 use App\Controllers\Controller;
 use App\Cliente;
+use App\Divida;
 
 class ClienteController extends Controller 
 {
     public function index()
     {
-        $clientes = (new Cliente())->paginate(2)->all();
+        $clientes = (new Cliente())->all();
         
         return $this->view('/clientes/index', [
-            'clientes' => $clientes
+            'clientes' => $clientes,
         ]); 
     }
 
@@ -41,16 +42,18 @@ class ClienteController extends Controller
         $cliente->sexo = $this->request()->input('sexo');
         $cliente->save();
 
-        $this->alert('Cliente salvo com sucesso');
+        $this->alert('success', 'Cliente salvo com sucesso');
         return $this->route()->redirect('/clientes/edit');
     }
 
     public function edit($id)
     {
         $cliente = (new Cliente())->find($id);
+        $dividas = (new Divida())->all();
         
         return $this->view('/clientes/edit', [
-            'cliente' => $cliente
+            'cliente' => $cliente,
+            'dividas' => $dividas
         ]);
     
     }
@@ -73,7 +76,9 @@ class ClienteController extends Controller
         $cpf = $this->request()->input('cpf');
         $sexo = $this->request()->input('sexo');
 
-        $cliente = (new Cliente())->update($id, [
+        $cliente = (new Cliente())->find($id);
+
+        $cliente->update([
             'nome' => $nome,
             'sobrenome' => $sobrenome,
             'nascimento' => $nascimento,
@@ -82,7 +87,7 @@ class ClienteController extends Controller
             'sexo' => $sexo
         ]);
 
-        $this->alert('Cliente atualizado com sucesso !');
+        $this->alert('success', 'Cliente atualizado com sucesso !');
         $this->route()->redirect('/clientes/edit');
 
     }
@@ -90,8 +95,8 @@ class ClienteController extends Controller
     public function destroy($id)
     {
         $cliente = (new Cliente())->delete($id);
-        $this->alert('Cliente removido com sucesso !');
-        $this->route()->redirect('/clientes/index');
+        $this->alert('success', 'Cliente removido com sucesso !');
+        $this->route()->redirect('/clientes');
     }
 
 

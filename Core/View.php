@@ -49,8 +49,8 @@ class View
         define('CONTENT', $view);
     }
 
-    public function alert($alert)
+    public function alert($status, $alert)
     {
-        $_SESSION['alert_success'] = $alert;
+        $_SESSION['alert-'.$status] = $alert;
     }
 }

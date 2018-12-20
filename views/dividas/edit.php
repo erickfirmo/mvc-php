@@ -37,6 +37,35 @@ if(!defined('LAYOUT')) return 'admin';
 <h3>Devedores</h3>
 
 <div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12 box">
+            <form method="POST" action="<?php route('/dividasdocliente/add/'); ?>">
+            <input type="hidden" name="_token" value="<?php token(); ?>">
+
+                <label for="divida_do_cliente">
+                    Clientes
+                    <br>
+                    <select name="cliente_id" id="divida_do_cliente" class="form-control">
+                    <?php 
+                        foreach ($clientes as $cliente)
+                        {
+                            echo '<option value="'.$cliente->id.'">'.$cliente->id.'. '.$cliente->nome.'</option>';
+                        }
+                    ?>
+                    </select>
+
+                    <input type="hidden" name="divida_id" value="<?php echo $divida->id; ?>">
+                
+                
+                </label>
+                
+                
+                <input type="submit" class="btn btn-primary" value="Adicionar Cliente">
+            </form>
+        </div>
+    </div>
+    <br>
     <div class="row">
         <div class="col-md-12">
             <div class="table-responsive">

@@ -14,7 +14,7 @@ class DividaDoClienteController extends Controller
     public function add()
     {
         $this->request()->validate([
-            'divida_do_cliente_id' => 'required',
+            'divida_id' => 'required',
             'cliente_id' => 'required'
         ]);
 
@@ -26,7 +26,7 @@ class DividaDoClienteController extends Controller
         {
             foreach ($cliente->dividas() as $div)
             {
-                if($div->id == $this->request()->input('divida_do_cliente_id'))
+                if($div->id == $this->request()->input('divida_id'))
                 {
                     $hasDivida = true;
                 }
@@ -46,7 +46,7 @@ class DividaDoClienteController extends Controller
     public function store()
     {
         $divida_do_cliente = new DividaDoCliente;
-        $divida_do_cliente->divida_id = $this->request()->input('divida_do_cliente_id');
+        $divida_do_cliente->divida_id = $this->request()->input('divida_id');
         $divida_do_cliente->cliente_id = $this->request()->input('cliente_id');
         $divida_do_cliente->save();
 

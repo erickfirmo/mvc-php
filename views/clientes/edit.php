@@ -68,7 +68,7 @@ if(!defined('LAYOUT')) return 'admin';
                 <label for="divida_do_cliente">
                     Dívidas
                     <br>
-                    <select name="divida_do_cliente_id" id="divida_do_cliente" class="form-control">
+                    <select name="divida_id" id="divida_do_cliente" class="form-control">
                     <?php 
                         foreach ($dividas as $divida)
                         {

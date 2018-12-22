@@ -11,6 +11,11 @@ use App\DividaDoCliente;
 
 class DividaController extends Controller 
 {
+
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
     public function index()
     {
         $dividas = (new Divida())->paginate(2)->all();

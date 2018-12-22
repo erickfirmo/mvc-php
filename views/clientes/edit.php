@@ -49,6 +49,7 @@ if(!defined('LAYOUT')) return 'admin';
             </form>
             <br>
             <form method="POST" action="<?php route('/clientes/destroy', $cliente->id); ?>">
+
                 <input type="submit" value="Excluir" class="btn btn-danger">
             </form>
         </div>
@@ -111,6 +112,7 @@ if(!defined('LAYOUT')) return 'admin';
                                 echo '<td>'.$divida->vencimento.'</td>';
                                 echo '<td><a href="/dividas/'.$divida->id.'/edit/"><button class="btn btn-light">Ver/Editar</button></a>
                                 <form method="POST" action="/dividasdocliente/'.$divida->pivot()->id.'/destroy/">
+
                                     <input type="submit" value="Remover" class="btn btn-danger">
                                 </form></td>';
                                 echo '</tr>';

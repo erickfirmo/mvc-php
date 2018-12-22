@@ -5,5 +5,6 @@ section('description', 'Crud de clientes e suas dívidas.');
 
 if(!defined('LAYOUT')) return 'admin';
 
+
 ?>
 

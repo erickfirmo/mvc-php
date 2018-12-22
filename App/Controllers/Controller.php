@@ -5,6 +5,7 @@ namespace App\Controllers;
 use Core\Request;
 use Core\View;
 use Core\Router;
+use Core\Auth;
 
 class Controller
 {
@@ -33,6 +34,17 @@ class Controller
     public function alert($status, $alert)
     {
         return (new View())->alert($status, $alert);
+    }
+
+    public function middleware($permission)
+    {
+        switch ($permission) {
+            case 'guest':
+                return (new \App\Middleware\UserMiddleware());
+                break;
+            case 'admin':
+                return (new \App\Middleware\AdminMiddleware());
+        }
     }
 
 }

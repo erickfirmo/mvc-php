@@ -32,9 +32,23 @@ $profile-image-width: 180px;
 }
 
 .box {
-    background-color: $secondaryColor;
+    background-color: #FFF;
     padding: 26px;
+    margin: 50px auto;
     box-shadow: 0px 1px 4px #CCC;
+}
+
+.login_form {
+    min-width: 300px;
+    label {
+        input.form-control {
+            .login_form label input.form-control {
+                display: block;
+                width: 260px;
+                margin-left: 6px;
+            }
+            }
+    }
 }
 
 .content {

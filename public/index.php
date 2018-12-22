@@ -7,4 +7,3 @@ new DBConnection();
 session_start();
 
 $route = (new Core\Router());
-

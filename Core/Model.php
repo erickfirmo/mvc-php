@@ -163,14 +163,17 @@ class Model
     //construct methods
     public function createObject($register, $class_name)
     {
-        $obj = new $class_name;
-
+        if(!$register)
+        {
+            return NULL;
+        } else {
+            $obj = new $class_name;
             foreach ($register as $key => $value)
-            {
+{
                 $obj->$key = $value;
             }
-        
-        return $obj;
+            return $obj;
+        }
     }
     
     public function objectsConstruct($registers, $class_name)
@@ -183,6 +186,7 @@ class Model
                 array_push($objects, $this->createObject($register, $class_name));
             }
         }
+        
         return $objects;
     }
 
@@ -240,6 +244,16 @@ class Model
         $obj->pivot_parent_id = $pivot_parent_id;
         $obj->pivot_table = $pivot_table;
         return $obj;
+    }
+
+    public function findBy($attr, $value)
+    {
+        $db = $this->getPDOConnection();
+        $sql = 'SELECT * FROM '.$this->table.' WHERE '.$attr.'="'.$value.'"';
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $register = $stmt->fetch();
+        return $this->createObject($register, static::class);
     }
 
     public function pivot()

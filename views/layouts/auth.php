@@ -13,39 +13,19 @@
 </head>
 <body>
 
-<?php
-
-partial('admin/_sidebar');
-
-?>
 
 
 
-
-
-
-<!--<div class="content-header">
+<div class="content-header">
     <div class="container-fluid">
         <div class="row">
-            <h1>description</h1>
+            <h1><?php section('description'); ?></h1>
         </div>
     </div>
-</div>-->
+</div>
 
-
-
-<section class="content">
-
-
-
-
-    <?php 
-
-    
-    partial('admin/_header');
-    
-    
-    alert(); ?>
+<section class="login">
+    <?php alert(); ?>
 
     <div class="container-fluid">
         <div class="row">

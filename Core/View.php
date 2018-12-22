@@ -6,6 +6,9 @@ class View
 {
     public function __construct()
     {
+
+        
+
         require_once __DIR__.'/../views/vendor/section.php';
         require_once __DIR__.'/../views/vendor/alert.php';
         require_once __DIR__.'/../views/vendor/pagination.php';

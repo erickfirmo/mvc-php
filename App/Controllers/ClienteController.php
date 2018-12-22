@@ -8,6 +8,11 @@ use App\Divida;
 
 class ClienteController extends Controller 
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
     public function index()
     {
         $clientes = (new Cliente())->all();

@@ -22,6 +22,16 @@ class UserController extends Controller
 
     public function register()
     {
+
+        $this->request()->validate([
+            'name' => 'required',
+            'lastname' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'confirm_password' => 'required'
+            
+        ]);
+        
         $user = new User;
         $user->name = $this->request()->input('name');
         $user->lastname = $this->request()->input('lastname');
@@ -52,15 +62,25 @@ class UserController extends Controller
     public function login()
     {
 
+        $this->request()->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
         $email = $this->request()->input('email');
 
         $user = (new User())->findBy('email', $email);
 
-
-        
-        if($user->password == md5($this->request()->input('password')))
+        if($user != NULL)
         {
-            $_SESSION['login@user'] = $user;
+            if($user->password == md5($this->request()->input('password')))
+            {
+                $_SESSION['login@user'] = $user;
+            } else {
+                $this->alert('danger', 'Senha incorreta !');
+            }
+        } else {
+            $this->alert('danger', 'Este email não corresponde a nenhuma conta.');
         }
 
         return $this->route()->redirect('/');

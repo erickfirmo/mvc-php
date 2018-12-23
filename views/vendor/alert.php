@@ -3,11 +3,11 @@
 function alert()
 {
     
-    if(isset($_SESSION['alert-error']))
+    if(isset($_SESSION['alert-validation']))
     {
-        if($_SESSION['alert-error'] != NULL)
+        if($_SESSION['alert-validation'] != NULL)
         {
-            foreach($_SESSION['alert-error'] as $error)
+            foreach($_SESSION['alert-validation'] as $error)
             {
                 echo '<div class="alert alert-danger" role="alert">'.$error.'<button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -26,7 +26,18 @@ function alert()
         }
     }
 
-    $_SESSION['alert-error'] = NULL;
+    if(isset($_SESSION['alert-danger']))
+    {
+        if($_SESSION['alert-danger'] != NULL)
+        {
+            echo '<div class="alert alert-danger" role="alert">'.$_SESSION['alert-danger'].'<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button></div>';
+        }
+    }
+
+    $_SESSION['alert-validation'] = NULL;
+    $_SESSION['alert-danger'] = NULL;
     $_SESSION['alert-success'] = NULL;
 
 }

@@ -43,7 +43,7 @@ class Request
         }
         if($this->status == false)
         {
-            $_SESSION['alert-error'] = $alerts;
+            $_SESSION['alert-validation'] = $alerts;
             header('location: '.$_SERVER['HTTP_REFERER']);
             exit();
         }

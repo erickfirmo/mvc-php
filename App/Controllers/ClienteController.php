@@ -93,19 +93,15 @@ class ClienteController extends Controller
         ]);
 
         $this->alert('success', 'Cliente atualizado com sucesso !');
-        $this->route()->redirect('/clientes/edit');
+        return $this->route()->redirect('/clientes/edit');
 
     }
 
     public function destroy($id)
     {
         $cliente = (new Cliente())->delete($id);
+
         $this->alert('success', 'Cliente removido com sucesso !');
-        $this->route()->redirect('/clientes');
+        return $this->route()->redirect('/clientes');
     }
-
-
-    
-
-    
 }

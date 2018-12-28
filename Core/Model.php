@@ -13,6 +13,7 @@ class Model
     public $pivot_entity = NULL;
     public $pivot_parent_id = NULL;
     public $pivot_table = NULL;
+    
 
     public function getPDOConnection()
     {
@@ -43,7 +44,7 @@ class Model
             $stmt->bindValue($key+1, $this->$field);
         }
         $stmt->execute();
-        define('PARAMETER', $db->lastInsertId());
+        define('PARAMETER', $db->lastInsertId(), true);
     }
 
     public function find($id)

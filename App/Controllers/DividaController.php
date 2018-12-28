@@ -7,8 +7,6 @@ use App\Divida;
 use App\Cliente;
 use App\DividaDoCliente;
 
-
-
 class DividaController extends Controller 
 {
 
@@ -18,19 +16,16 @@ class DividaController extends Controller
     }
     public function index()
     {
-        $dividas = (new Divida())->paginate(2)->all();
+        $dividas = (new Divida())->all();
 
         return $this->view('/dividas/index', [
             'dividas' => $dividas
         ]);
     }
 
-    
-
     public function create()
     {
         $clientes = (new Cliente())->all();
-
         return $this->view('/dividas/create');
     }
 
@@ -40,7 +35,6 @@ class DividaController extends Controller
         $divida->valor = $this->request()->input('valor');
         $divida->vencimento = $this->request()->input('vencimento');
         $divida->save();
-
         $this->alert('success', 'Dívida cadastrada com sucesso !');
         return $this->route()->redirect('/dividas/edit');
     }
@@ -49,20 +43,17 @@ class DividaController extends Controller
     {
         $divida = (new Divida())->find($id);
         $clientes = (new Cliente())->all();
-
-
         return $this->view('/dividas/edit', [
             'divida' => $divida,
             'clientes' => $clientes
         ]);
-
     }
 
     public function show($id)
     {
         $divida = (new Divida())->find($id);
 
-        return $this->view('/dividas/edit', [
+        return $this->view('/dividas/show', [
             'divida' => $divida
         ]);
 
@@ -72,7 +63,7 @@ class DividaController extends Controller
     {
         $valor = $this->request()->input('valor');
         $vencimento = $this->request()->input('vencimento');
-        $divida (new Divida())->find($id);
+        $divida = (new Divida())->find($id);
         $divida->update([
             'valor' => $valor,
             'vencimento' => $vencimento

@@ -1,5 +1,9 @@
 <?php
-function partial($path)
+function partial($path, $values=NULL)
 {
-    include '../views/partials/'.$path.'.php';
+    if($values != NULL)
+            foreach($values as $responseName => $responseValue)
+                $$responseName = $responseValue;
+                
+    require '../views/partials/'.$path.'.php';
 }

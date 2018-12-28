@@ -7,17 +7,25 @@ class View
     public function __construct()
     {
 
-        
-
         require_once __DIR__.'/../views/vendor/section.php';
         require_once __DIR__.'/../views/vendor/alert.php';
         require_once __DIR__.'/../views/vendor/pagination.php';
+        require_once __DIR__.'/../views/vendor/active-url.php';
+        require_once __DIR__.'/../views/vendor/auth.php';
         require_once __DIR__.'/../helpers/route.php';
         require_once __DIR__.'/../helpers/url.php';
         require_once __DIR__.'/../helpers/partial.php';
 
 
+
         $this->tokenGenerator();
+    }
+
+    public function responseValues($values)
+    {
+        if($values != NULL)
+            foreach($values as $responseName => $responseValue)
+                $$responseName = $responseValue;
     }
     
     public function getViewResponse($view, $values=0)

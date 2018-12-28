@@ -1,9 +1,10 @@
 <?php 
 
 section('title', 'MVC PHP | Dívida');
+section('page-title', 'Informações da Dívida');
 section('description', 'Informações da dívida');
 
-if(!defined('LAYOUT')) return 'admin';
+if(!defined('LAYOUT')) return 'adminlte';
 
 ?>
 

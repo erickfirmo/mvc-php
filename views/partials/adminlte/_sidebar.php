@@ -53,7 +53,7 @@
       </a>
       <ul class="treeview-menu">
         <li class="<?php classActiveUrl('/dividas'); ?>"><a href="<?php url('/dividas'); ?>">Todas as Dívidas</a></li>
-        <li class="<?php classActiveUrl('/dividas/create'); ?>"><a href="<?php url('/dividas/create'); ?>#">Adicionar Dívida</a></li>
+        <li class="<?php classActiveUrl('/dividas/create'); ?>"><a href="<?php url('/dividas/create'); ?>">Adicionar Dívida</a></li>
       </ul>
     </li>
   </ul>

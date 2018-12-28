@@ -28,6 +28,4 @@ class DividaDoCliente extends Model
     {
         return $this->belongsTo(new Divida, 'divida_id');
     }
-
-
 }

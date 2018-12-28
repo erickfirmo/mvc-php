@@ -13,6 +13,4 @@ class Auth
     {
         return $this->password;
     }
-
-
 }

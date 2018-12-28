@@ -9,7 +9,6 @@ use App\User;
 
 class UserController extends Controller
 {
-
     public function showRegisterForm()
     {
         return $this->view('/user/register_form');
@@ -22,16 +21,13 @@ class UserController extends Controller
 
     public function register()
     {
-
         $this->request()->validate([
             'name' => 'required',
             'lastname' => 'required',
             'email' => 'required',
             'password' => 'required',
             'confirm_password' => 'required'
-            
         ]);
-        
         $user = new User;
         $user->name = $this->request()->input('name');
         $user->lastname = $this->request()->input('lastname');
@@ -40,37 +36,23 @@ class UserController extends Controller
         {
             $user->password = md5($this->request()->input('password'));
             $user->save();
-
-            
             $_SESSION['login@user'] = $user;
-
-            
         } else {
             $this->alert('success', 'Senhas não correspondem !');
             return $this->route()->back();
-
-            
         }
-
-        
         return $this->route()->redirect('/');
-
-
-        
     }
 
     public function login()
     {
-
         $this->request()->validate([
             'email' => 'required',
             'password' => 'required',
         ]);
 
         $email = $this->request()->input('email');
-
         $user = (new User())->findBy('email', $email);
-
         if($user != NULL)
         {
             if($user->password == md5($this->request()->input('password')))
@@ -82,7 +64,6 @@ class UserController extends Controller
         } else {
             $this->alert('danger', 'Este email não corresponde a nenhuma conta.');
         }
-
         return $this->route()->redirect('/');
     }
 

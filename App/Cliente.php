@@ -31,6 +31,4 @@ class Cliente extends Model
     {
         return $this->belongsToMany(new Divida, new DividaDoCliente, 'cliente_id', 'divida_id');
     }
-
-
 }

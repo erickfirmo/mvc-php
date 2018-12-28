@@ -16,7 +16,6 @@ class ClienteController extends Controller
     public function index()
     {
         $clientes = (new Cliente())->all();
-        
         return $this->view('/clientes/index', [
             'clientes' => $clientes,
         ]); 
@@ -37,7 +36,6 @@ class ClienteController extends Controller
             'cpf' => 'required',
             'sexo' => 'required'
         ]);
-
         $cliente = new Cliente;
         $cliente->nome = $this->request()->input('nome');
         $cliente->sobrenome = $this->request()->input('sobrenome');
@@ -46,7 +44,6 @@ class ClienteController extends Controller
         $cliente->cpf = $this->request()->input('cpf');
         $cliente->sexo = $this->request()->input('sexo');
         $cliente->save();
-
         $this->alert('success', 'Cliente salvo com sucesso');
         return $this->route()->redirect('/clientes/edit');
     }
@@ -55,12 +52,10 @@ class ClienteController extends Controller
     {
         $cliente = (new Cliente())->find($id);
         $dividas = (new Divida())->all();
-        
         return $this->view('/clientes/edit', [
             'cliente' => $cliente,
             'dividas' => $dividas
         ]);
-    
     }
 
     public function show($id)
@@ -69,7 +64,6 @@ class ClienteController extends Controller
         return $this->view('/clientes/show', [
             'cliente' => $cliente
         ]);
-    
     }
 
     public function update($id)
@@ -80,9 +74,7 @@ class ClienteController extends Controller
         $rg = $this->request()->input('rg');
         $cpf = $this->request()->input('cpf');
         $sexo = $this->request()->input('sexo');
-
         $cliente = (new Cliente())->find($id);
-
         $cliente->update([
             'nome' => $nome,
             'sobrenome' => $sobrenome,
@@ -91,16 +83,13 @@ class ClienteController extends Controller
             'cpf' => $cpf,
             'sexo' => $sexo
         ]);
-
         $this->alert('success', 'Cliente atualizado com sucesso !');
         return $this->route()->redirect('/clientes/edit');
-
     }
 
     public function destroy($id)
     {
         $cliente = (new Cliente())->delete($id);
-
         $this->alert('success', 'Cliente removido com sucesso !');
         return $this->route()->redirect('/clientes');
     }

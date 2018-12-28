@@ -46,5 +46,4 @@ class Controller
                 return (new \App\Middleware\AdminMiddleware());
         }
     }
-
 }

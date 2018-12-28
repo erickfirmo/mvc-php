@@ -13,7 +13,6 @@ class Model
     public $pivot_entity = NULL;
     public $pivot_parent_id = NULL;
     public $pivot_table = NULL;
-    
 
     public function getPDOConnection()
     {
@@ -170,7 +169,7 @@ class Model
         } else {
             $obj = new $class_name;
             foreach ($register as $key => $value)
-{
+            {
                 $obj->$key = $value;
             }
             return $obj;
@@ -303,5 +302,4 @@ class Model
         }
         return $content;
     }
-
 }

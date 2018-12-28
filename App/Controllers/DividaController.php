@@ -9,15 +9,14 @@ use App\DividaDoCliente;
 
 class DividaController extends Controller 
 {
-
     public function __construct()
     {
         $this->middleware('admin');
     }
+    
     public function index()
     {
         $dividas = (new Divida())->all();
-
         return $this->view('/dividas/index', [
             'dividas' => $dividas
         ]);
@@ -52,11 +51,9 @@ class DividaController extends Controller
     public function show($id)
     {
         $divida = (new Divida())->find($id);
-
         return $this->view('/dividas/show', [
             'divida' => $divida
         ]);
-
     }
 
     public function update($id)
@@ -68,8 +65,6 @@ class DividaController extends Controller
             'valor' => $valor,
             'vencimento' => $vencimento
         ]);
-
-        
         $this->alert('success', 'Dívida atualizada com sucesso !');
         return $this->route()->redirect('/dividas/edit');
     }
@@ -79,8 +74,5 @@ class DividaController extends Controller
         $delete = (new Divida())->delete($id);
         $this->alert('success', 'Dívida removida com sucesso !');
         return $this->route()->redirect('/dividas');
-
     }
-
-    
 }

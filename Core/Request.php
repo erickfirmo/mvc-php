@@ -21,6 +21,7 @@ class Request
         if(isset($_POST[$inputName]))
             return $_POST[$inputName];
     }
+
     public function validate(array $rules)
     {
         $alerts = [];
@@ -38,7 +39,6 @@ class Request
                 {
                     array_push($alerts, $isValid);    
                 }
-                
             }   
         }
         if($this->status == false)
@@ -48,6 +48,7 @@ class Request
             exit();
         }
     }
+
     public function required($inputName, $param=0)
     {
         if(!isset($_POST[$inputName]) || empty($_POST[$inputName]))
@@ -56,6 +57,7 @@ class Request
             return 'O campo '.$inputName.' é obrigatório.';
         }
     }
+
     public function max($inputName, $max)
     {
         if($max < strlen($_POST[$inputName]))
@@ -66,6 +68,7 @@ class Request
             return false;
         }
     }
+
     public function min($inputName, $min)
     {
         if($min > strlen($_POST[$inputName]))
@@ -76,6 +79,7 @@ class Request
             return false;
         }
     }
+    
     public function datatype($inputName, $type)
     {
         if($type != gettype($_POST[$inputName]))

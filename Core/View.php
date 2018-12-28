@@ -6,7 +6,6 @@ class View
 {
     public function __construct()
     {
-
         require_once __DIR__.'/../views/vendor/section.php';
         require_once __DIR__.'/../views/vendor/alert.php';
         require_once __DIR__.'/../views/vendor/pagination.php';
@@ -15,9 +14,6 @@ class View
         require_once __DIR__.'/../helpers/route.php';
         require_once __DIR__.'/../helpers/url.php';
         require_once __DIR__.'/../helpers/partial.php';
-
-
-
         $this->tokenGenerator();
     }
 

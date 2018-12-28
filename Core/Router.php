@@ -47,8 +47,6 @@ class Router
             (new $controller())->$method();
     }
 
-    
-
     protected function setRoutes()
     {
         $this->routes = include_once '../routes/routes.php';
@@ -194,7 +192,6 @@ class Router
     public function setConfig()
     {
         $this->config = (include '../config/app.php');
-
     }
 
     public function getConfig($index)
@@ -202,31 +199,19 @@ class Router
         return $this->config[$index];
     }
 
-
     public function redirect($route)
     {
         $url = array_reverse(explode('/', $route));
-
-        
         if($url[0] == 'edit')
         {
             $redirect = '/'.$url[1].'/'.constant('PARAMETER').'/edit';
         } elseif($url[0] == 'show') {
-
-            
             $redirect = '/'.$url[1].'/'.constant('PARAMETER');
-            
         } else {
             $redirect = $route;
         }
-            
-            
-        
-
         header('location:'.$this->getConfig('APP_URL').$redirect);
-                exit();
-        
-        
+        exit();
     }
 
     public function back()
@@ -234,7 +219,4 @@ class Router
         header('location:'.$_SERVER['HTTP_REFERER']);
         exit();
     }
-
-
-    
 }

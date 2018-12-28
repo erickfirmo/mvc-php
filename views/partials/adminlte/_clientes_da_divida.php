@@ -11,7 +11,7 @@
                         <input type="hidden" name="_token" value="<?php token(); ?>">
                         <input type="hidden" name="divida_id" value="<?php echo $divida->id; ?>">
                         <div class="form-group">
-                            <label for="clientes">Dívidas</label>
+                            <label for="clientes">Clientes</label>
                             <select name="cliente_id" id="clientes" class="form-control">
                             <?php 
                                 foreach ($clientes as $cliente)

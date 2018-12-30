@@ -5,11 +5,11 @@ return [
 
     'HOST' => 'localhost',
 
-    'DB_USER' => 'root',
+    'DB_USER' => 'usuario_do_banco',
 
     'DB_PASSWORD' => '',
 
-    'DB_NAME' => 'dividas',
+    'DB_NAME' => 'nome_do_banco',
 
     'DB_DRIVER' => 'mysql',
 

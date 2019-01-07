@@ -1,11 +1,10 @@
 <?php
 
 return [
-    
 
     'HOST' => 'localhost',
 
-    'DB_USER' => 'usuario_do_banco',
+    'DB_USER' => 'root',
 
     'DB_PASSWORD' => '',
 
@@ -13,6 +12,6 @@ return [
 
     'DB_DRIVER' => 'mysql',
 
-    'CHARSET' => 'uft-8'
+    'CHARSET' => 'utf-8'
 
 ];

@@ -1,5 +1,7 @@
-# mvc-php
+# MVC-PHP
+
 Base de projeto MVC em PHP
+
 
 ## Instalação
 
@@ -8,7 +10,7 @@ Base de projeto MVC em PHP
 composer update
 
 
-### Para usar Bootstrap 4 e Jquery, digite a linha de comando na pasta public localizada na raíz do projeto:
+### Digite as linhas de comando na pasta public localizada na raíz do projeto:
 
 npm install jquery
 
@@ -17,14 +19,15 @@ npm install bootstrap
 npm install popper.js
 
 
+
 ### Configure os arquivos app.php e database.php na pasta config, localizada na raíz do projeto:
 
 
 //app.php
 
-![alt text](https://raw.githubusercontent.com/erickfirmo/dividas-dos-clientes/master/config1.png)
+![alt text](https://raw.githubusercontent.com/erickfirmo/mvc-php/master/config1.png)
 
 
 //database.php
 
-![alt text](https://raw.githubusercontent.com/erickfirmo/dividas-dos-clientes/master/config2.png)
+![alt text](https://raw.githubusercontent.com/erickfirmo/mvc-php/master/config2.png)

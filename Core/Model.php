@@ -43,7 +43,7 @@ class Model
             $stmt->bindValue($key+1, $this->$field);
         }
         $stmt->execute();
-        define('PARAMETER', $db->lastInsertId(), true);
+        $_SESSION['PARAMETER'] = $db->lastInsertId();
     }
 
     public function find($id)
@@ -78,6 +78,7 @@ class Model
         $stmt->execute();
     }
 
+
     public function all()
     {
         $sql = 'SELECT * FROM '.$this->table;
@@ -89,12 +90,12 @@ class Model
         {
             $this->setPagination($registers);
             $sql = 'SELECT * FROM '.$this->table.' LIMIT '.$this->getLimit();
+
             if($_SESSION['PAGE'] > 1)
             {
                 $sql = $sql.' OFFSET '.($_SESSION['PAGE'] - 1)*$this->getLimit();
             }
             $_SESSION['PAGINATE'] = true;
-            $db = $this->getPDOConnection();
             $stmt = $db->prepare($sql);
             $stmt->execute();
             $registers = $stmt->fetchAll(); 
@@ -106,27 +107,29 @@ class Model
 
     public function where($condition)
     {
-        $sql = 'SELECT * FROM '.$this->table.' WHERE '.$condition;
         $db = $this->getPDOConnection();
+        $sql = 'SELECT * FROM '.$this->table.' WHERE '.$condition;
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $registers = $stmt->fetchAll();
         if($this->paginate)
         {
             $this->setPagination($registers);
-            $sql = 'SELECT * FROM '.$this->table.' WHERE '.$condition;
-            
-            $sql = $sql.' LIMIT '.$this->getLimit();
             if($_SESSION['PAGE'] > 1)
             {
-                $sql = $sql.' OFFSET '.($_SESSION['PAGE'] -1)*$this->getLimit();
+                $sql = $sql.' OFFSET '.($_SESSION['PAGE'] - 1)*$this->getLimit();
             }
-            $db = $this->getPDOConnection();
-            $stmt = $db->prepare($sql);
+            $_SESSION['PAGINATE'] = true;
+            $stmt = $this->getStmt($sql);
             $stmt->execute();
-            $registers = $stmt->fetchAll();
+            $registers = $stmt->fetchAll(); 
+        } else {
+            $_SESSION['PAGINATE'] = false;
         }
-        return $this->objectsConstruct($registers, static::class);
+        if(count($registers) > 1)
+            return $this->objectsConstruct($registers, static::class);
+        else
+            return $this->createObject($registers, static::class);
     }
 
     public function delete($id)
@@ -234,9 +237,10 @@ class Model
 
     public function findPivot($pivot_entity_name, $pivot_table, $pivot_parent_id, $parent_table, $value)
     {
-        $db = $this->getPDOConnection();   
+        $db = $this->getPDOConnection();
         $sql = 'SELECT pivot.id FROM '.$pivot_table.' AS pivot INNER JOIN '.$parent_table.' AS parent ON pivot.'.$pivot_parent_id.'=parent.id';
         $stmt = $db->prepare($sql);
+        
         $stmt->execute();
         $register = $stmt->fetch();
         $obj = $this->createObject($register, $pivot_entity_name);
@@ -246,10 +250,10 @@ class Model
         return $obj;
     }
 
-    public function findBy($attr, $value)
+    public function findBy($conditions)
     {
         $db = $this->getPDOConnection();
-        $sql = 'SELECT * FROM '.$this->table.' WHERE '.$attr.'="'.$value.'"';
+        $sql = 'SELECT * FROM '.$this->table.' WHERE '.$conditions;
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $register = $stmt->fetch();
@@ -266,8 +270,8 @@ class Model
     public function belongsToMany($entity, $pivot_entity, $parent_id_a, $parent_id_b)
     {
         $this->setPivot($pivot_entity, $parent_id_a, $this->table);
-        $db = $this->getPDOConnection();
         $fields = NULL;
+
         foreach ($entity->fields as $key => $field)
         {
             if(count($entity->fields) == $key+1)
@@ -277,6 +281,8 @@ class Model
                 $fields = $fields.' '.$field.', ';
             }
         }
+
+        $db = $this->getPDOConnection();
         $sql = 'SELECT '.$entity->table.'.id, '.$fields.' FROM '.$entity->table.' RIGHT JOIN '.$pivot_entity->table.' AS pivot ON pivot.'.$parent_id_a.'='.$this->id.' AND pivot.'.$parent_id_b.'='.$entity->table.'.id WHERE '.$entity->table.'.id IS NOT NULL';
         $stmt = $db->prepare($sql);
         $stmt->execute();
@@ -301,5 +307,29 @@ class Model
             return '(Nenhum)';
         }
         return $content;
+    }
+
+
+    public function seeInDatabase($table, $fields)
+    {
+        $conditions = '';
+        $first = false;
+        foreach ($fields as $field => $value)
+        {
+            if($first == false)
+            {
+                $first = true;
+                $conditions = $field.'="'.$value.'"';
+            } else {
+                $conditions = $conditions.' AND '.$field.'="'.$value.'"';
+
+            }
+        }
+        $db = $this->getPDOConnection();
+        $sql = 'SELECT * FROM '.$table.' WHERE '.$conditions;
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $register = $stmt->fetch();
+        return $this->createObject($register, static::class);
     }
 }

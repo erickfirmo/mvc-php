@@ -100,7 +100,7 @@ class Router
     protected function setParameter($parameterIndex)
     {
         $this->parameter = $this->getUrlParam($parameterIndex);
-        define('PARAMETER', $this->parameter);
+        $_SESSION['PARAMETER'] = $this->parameter;
     }
 
     protected function getParameter()
@@ -204,9 +204,9 @@ class Router
         $url = array_reverse(explode('/', $route));
         if($url[0] == 'edit')
         {
-            $redirect = '/'.$url[1].'/'.constant('PARAMETER').'/edit';
+            $redirect = '/'.$url[1].'/'.$_SESSION['PARAMETER'].'/edit';
         } elseif($url[0] == 'show') {
-            $redirect = '/'.$url[1].'/'.constant('PARAMETER');
+            $redirect = '/'.$url[1].'/'.$_SESSION['PARAMETER'];
         } else {
             $redirect = $route;
         }

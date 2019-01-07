@@ -3,7 +3,6 @@
 namespace App;
 
 use Core\Model;
-use App\User;
 
 class Admin extends Model
 {
@@ -21,6 +20,4 @@ class Admin extends Model
         'email',
         'password',
     ];
-
-
 }

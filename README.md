@@ -25,9 +25,9 @@ npm install popper.js
 
 //app.php
 
-![alt text](https://raw.githubusercontent.com/erickfirmo/mvc-php/master/config1.png)
+![alt text](https://raw.githubusercontent.com/erickfirmo/mvc-php/master/config1.PNG)
 
 
 //database.php
 
-![alt text](https://raw.githubusercontent.com/erickfirmo/mvc-php/master/config2.png)
+![alt text](https://raw.githubusercontent.com/erickfirmo/mvc-php/master/config2.PNG)

@@ -11,6 +11,7 @@ class View
         require_once __DIR__.'/../views/vendor/pagination.php';
         require_once __DIR__.'/../views/vendor/active-url.php';
         require_once __DIR__.'/../views/vendor/auth.php';
+        require_once __DIR__.'/../views/vendor/page-assets.php';
         require_once __DIR__.'/../helpers/route.php';
         require_once __DIR__.'/../helpers/url.php';
         require_once __DIR__.'/../helpers/partial.php';

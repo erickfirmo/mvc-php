@@ -31,8 +31,8 @@ class Request
             foreach ($rulesArray as $r)
             {
                 $rArray = explode(':', $r);
-                $rAction = $rArray[0];   
-                $rParam = $rArray[1];   
+                $rAction = $rArray[0]; 
+                $rParam = isset($rArray[1]) ? $rArray[1] : NULL;
                 $isValid = $this->$rAction($inputName, $rParam);
 
                 if(isset($isValid) && $isValid != false)

@@ -1,0 +1,2 @@
+<a href="<?php echo $page == 1 ? '#' : '?page='.$previous; ?>"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button></a>
+<a href="<?php echo $page >= $n_pages ? '#' : '?page='.$next; ?>"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button></a>

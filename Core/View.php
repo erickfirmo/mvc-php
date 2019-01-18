@@ -8,7 +8,7 @@ class View
     {
         require_once __DIR__.'/../views/vendor/section.php';
         require_once __DIR__.'/../views/vendor/alert.php';
-        require_once __DIR__.'/../views/vendor/pagination.php';
+        require_once __DIR__.'/../views/vendor/paginations/pagination.php';
         require_once __DIR__.'/../views/vendor/active-url.php';
         require_once __DIR__.'/../views/vendor/auth.php';
         require_once __DIR__.'/../views/vendor/page-assets.php';

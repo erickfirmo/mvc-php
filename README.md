@@ -23,10 +23,16 @@ npm install popper.js
 ### Configure os arquivos app.php e database.php na pasta config, localizada na raíz do projeto:
 
 
-//app.php
-`` teste ``
+Configure o arquivo ``app.php``:
+`` 
+return [
 
-![alt text](https://raw.githubusercontent.com/erickfirmo/mvc-php/master/config1.PNG)
+'APP_NAME' => "Project Name",
+'APP_URL' => "Your Domain",
+
+];
+
+``
 
 
 //database.php
